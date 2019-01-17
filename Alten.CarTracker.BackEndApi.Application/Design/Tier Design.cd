@@ -24,14 +24,6 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="Alten.CarTracker.BackEndApi.Application.CarStatusService" Collapsed="true">
-    <Position X="4.25" Y="2.25" Width="3" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAABAAABAAAABAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>CarStatusService.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
   <Class Name="Alten.CarTracker.BackEndApi.Application.DTOs.VehicleDTO" Collapsed="true">
     <Position X="4.25" Y="4.5" Width="1.5" />
     <TypeIdentifier>
@@ -65,13 +57,6 @@
     <TypeIdentifier>
       <HashCode>AAYAAAAAAAAAAABAAAAAAAAAAAEIAAAAAAAAAAAAAQA=</HashCode>
       <FileName>IApplicationServiceBase.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="Alten.CarTracker.BackEndApi.Application.ICarStatusService" Collapsed="true">
-    <Position X="0.75" Y="6" Width="2.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>ICarStatusService.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Alten.CarTracker.BackEndApi.Application.ICustomerService" Collapsed="true">

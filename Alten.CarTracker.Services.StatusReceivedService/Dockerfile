@@ -1,21 +1,23 @@
 FROM microsoft/dotnet:2.2-aspnetcore-runtime AS base
 WORKDIR /app
-EXPOSE 80
-EXPOSE 443
+EXPOSE 5001
+ENV ASPNETCORE_URLS http://*:5001
+HEALTHCHECK --interval=30s --timeout=3s --retries=1 CMD curl --silent --fail http://localhost:5001/hc || exit 1
+ENV WEBSITE_SITE_NAME StatusReceivedService
 
 FROM microsoft/dotnet:2.2-sdk AS build
 WORKDIR /src
-COPY ["Alten.CarTracker.Services.StatusReceivedService/Alten.CarTracker.Services.StatusReceivedService.csproj", "Alten.CarTracker.Services.StatusReceivedService/"]
-COPY ["Alten.CarTracker.Infrastructure.Common/Alten.CarTracker.Infrastructure.Common.csproj", "Alten.CarTracker.Infrastructure.Common/"]
-COPY ["Alten.CarTracker.Infrastructure.Messaging/Alten.CarTracker.Infrastructure.Messaging.csproj", "Alten.CarTracker.Infrastructure.Messaging/"]
-COPY ["Alten.CarTracker.Infrastructure.ServiceDiscovery/Alten.CarTracker.Infrastructure.ServiceDiscovery.csproj", "Alten.CarTracker.Infrastructure.ServiceDiscovery/"]
-RUN dotnet restore "Alten.CarTracker.Services.StatusReceivedService/Alten.CarTracker.Services.StatusReceivedService.csproj"
+COPY Alten.CarTracker.Services.StatusReceivedService/Alten.CarTracker.Services.StatusReceivedService.csproj Alten.CarTracker.Services.StatusReceivedService/
+COPY Alten.CarTracker.Infrastructure.Common/Alten.CarTracker.Infrastructure.Common.csproj Alten.CarTracker.Infrastructure.Common/
+COPY Alten.CarTracker.Infrastructure.Messaging/Alten.CarTracker.Infrastructure.Messaging.csproj Alten.CarTracker.Infrastructure.Messaging/
+COPY Alten.CarTracker.Infrastructure.ServiceDiscovery/Alten.CarTracker.Infrastructure.ServiceDiscovery.csproj Alten.CarTracker.Infrastructure.ServiceDiscovery/
+RUN dotnet restore Alten.CarTracker.Services.StatusReceivedService/Alten.CarTracker.Services.StatusReceivedService.csproj
 COPY . .
-WORKDIR "/src/Alten.CarTracker.Services.StatusReceivedService"
-RUN dotnet build "Alten.CarTracker.Services.StatusReceivedService.csproj" -c Release -o /app
+WORKDIR /src/Alten.CarTracker.Services.StatusReceivedService
+RUN dotnet build Alten.CarTracker.Services.StatusReceivedService.csproj -c Release -o /app
 
 FROM build AS publish
-RUN dotnet publish "Alten.CarTracker.Services.StatusReceivedService.csproj" -c Release -o /app
+RUN dotnet publish Alten.CarTracker.Services.StatusReceivedService.csproj -c Release -o /app
 
 FROM base AS final
 WORKDIR /app

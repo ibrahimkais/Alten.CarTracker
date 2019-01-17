@@ -1,0 +1,77 @@
+version: '3.4'
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: car-rabbit
+    volumes:
+      - rabbitmqdata:/var/lib/rabbitmq
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=rabbitmquser
+      - RABBITMQ_DEFAULT_PASS=P@ssw0rd
+
+  sqlserver:
+    image: microsoft/mssql-server-linux:latest
+    container_name: sqlserver
+    volumes:
+      - sqlserverdata:/var/opt/mssql 
+    ports:
+      - "1434:1433"
+    environment:
+      - ACCEPT_EULA=Y 
+      - MSSQL_PID=Developer
+      - SA_PASSWORD=P@ssw0rd
+
+  discoveryservice:
+    image: consul:latest
+    container_name: discoveryservice
+    ports:
+      - "8500:8500"
+    command: ["agent", "-dev", "-client", "0.0.0.0", "-bind", "0.0.0.0"]  
+
+  logserver:
+    image: datalust/seq:latest
+    container_name: logserver
+    ports:
+      - "5341:80"
+    environment:
+      - ACCEPT_EULA=Y 
+
+  alten.cartracker.services.statusreceivedservice:
+    image: car_tracker/statusreceivedservice
+    build:
+      context: .
+      dockerfile: Alten.CarTracker.Services.StatusReceivedService/Dockerfile
+    depends_on:
+      - discoveryservice
+      - rabbitmq
+      - sqlserver
+    ports:
+      - "5000"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ApplicationInsights:InstrumentationKey=${CarTrackerAIKey}
+
+  alten.cartracker.backendapi.api:
+    image: car_tracker/backendapi
+    build:
+      context: .
+      dockerfile: Alten.CarTracker.BackEndApi.Api/Dockerfile
+    depends_on:
+      - discoveryservice
+      - rabbitmq
+      - sqlserver
+    ports:
+      - "5001"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ApplicationInsights:InstrumentationKey=${CarTrackerAIKey}
+
+volumes:
+  sqlserverdata:
+    external: true    
+  rabbitmqdata:
+    external: true

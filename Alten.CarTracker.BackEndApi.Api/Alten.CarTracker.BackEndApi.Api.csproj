@@ -6,18 +6,29 @@
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <UserSecretsId>b56b0b9a-be7e-4ad8-bbbb-9ee27593fc4f</UserSecretsId>
     <StartupObject>Alten.CarTracker.BackEndApi.Api.Program</StartupObject>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.5.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.HealthChecks" Version="1.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="2.2.1" />
+    <PackageReference Include="Microsoft.Extensions.HealthChecks.SqlServer" Version="1.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.1.1" />
+    <PackageReference Include="Serilog.AspNetCore" Version="2.1.1" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="3.0.1" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
+    <PackageReference Include="Serilog.Sinks.Seq" Version="4.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Alten.CarTracker.BackEndApi.Application\Alten.CarTracker.BackEndApi.Application.csproj" />
+    <ProjectReference Include="..\Alten.CarTracker.Infrastructure.Messaging\Alten.CarTracker.Infrastructure.Messaging.csproj" />
+    <ProjectReference Include="..\Alten.CarTracker.Infrastructure.ServiceDiscovery\Alten.CarTracker.Infrastructure.ServiceDiscovery.csproj" />
   </ItemGroup>
 
 </Project>

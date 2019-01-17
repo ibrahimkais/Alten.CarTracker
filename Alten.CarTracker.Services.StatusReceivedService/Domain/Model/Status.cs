@@ -1,4 +1,5 @@
 ﻿using Alten.CarTracker.Infrastructure.Common.Domain.Model;
+using NetTopologySuite.Geometries;
 using System;
 
 namespace Alten.CarTracker.Services.StatusReceivedService.Domain.Model
@@ -7,7 +8,7 @@ namespace Alten.CarTracker.Services.StatusReceivedService.Domain.Model
 	{
 		public DateTime ReceivedDate { get; set; }
 
-		public string Location { get; set; }
+		public Point Location { get; set; }
 
 		public string CarId { get; set; }
 

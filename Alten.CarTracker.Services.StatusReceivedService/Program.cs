@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore;
+﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace Alten.CarTracker.Services.StatusReceivedService
 {
@@ -19,6 +13,9 @@ namespace Alten.CarTracker.Services.StatusReceivedService
 
 		public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
 			WebHost.CreateDefaultBuilder(args)
+			.UseApplicationInsights()
+				.UseSerilog()
+				.UseHealthChecks("/hc")
 				.UseStartup<Startup>();
 	}
 }

@@ -12,14 +12,12 @@ namespace Alten.CarTracker.BackEndApi.Api.Controllers
 	public class DataController : ControllerBase
 	{
 		private readonly ICustomerService _customerService;
-		private readonly ICarStatusService _carStatusService;
 		private readonly IVehicleService _vehicleService;
 
-		public DataController(ICustomerService customerService, ICarStatusService carStatusService, IVehicleService vehicleService)
+		public DataController(ICustomerService customerService, IVehicleService vehicleService)
 		{
 			_customerService = customerService;
 			_vehicleService = vehicleService;
-			_carStatusService = carStatusService;
 		}
 
 		[HttpGet]

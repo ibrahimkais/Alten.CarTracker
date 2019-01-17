@@ -16,8 +16,6 @@ namespace Alten.CarTracker.BackEndApi.Application.AutoMapperProfiles
 			CreateMap<Customer, CustomerDTO>()
 				.ForMember(dest => dest.Vehicles, opt => opt.MapFrom(c => c.Cars))
 				.ReverseMap();
-
-			CreateMap<CarStatusLookup, CarStatusDTO>();
 		}
 	}
 }

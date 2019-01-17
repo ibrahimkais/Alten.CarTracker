@@ -13,27 +13,29 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Services", "4. Services"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5. Tests", "5. Tests", "{64BD8032-99F9-42BA-AEDD-5516266810B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alten.CarTracker.BackEndApi.Domain", "Alten.CarTracker.BackEndApi.Domain\Alten.CarTracker.BackEndApi.Domain.csproj", "{813F5F95-63BC-40D1-900B-F53F6744D7EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alten.CarTracker.BackEndApi.Domain", "Alten.CarTracker.BackEndApi.Domain\Alten.CarTracker.BackEndApi.Domain.csproj", "{813F5F95-63BC-40D1-900B-F53F6744D7EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alten.CarTracker.BackEndApi.DataAccess", "Alten.CarTracker.BackEndApi.DataAccess\Alten.CarTracker.BackEndApi.DataAccess.csproj", "{16515D96-D137-460F-AC32-D3AA8240C5B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alten.CarTracker.BackEndApi.DataAccess", "Alten.CarTracker.BackEndApi.DataAccess\Alten.CarTracker.BackEndApi.DataAccess.csproj", "{16515D96-D137-460F-AC32-D3AA8240C5B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alten.CarTracker.BackEndApi.Application", "Alten.CarTracker.BackEndApi.Application\Alten.CarTracker.BackEndApi.Application.csproj", "{991D58DD-58CF-4EAB-B92C-9378D4B1AE2B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alten.CarTracker.BackEndApi.Application", "Alten.CarTracker.BackEndApi.Application\Alten.CarTracker.BackEndApi.Application.csproj", "{991D58DD-58CF-4EAB-B92C-9378D4B1AE2B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alten.CarTracker.BackEndApi.Api", "Alten.CarTracker.BackEndApi.Api\Alten.CarTracker.BackEndApi.Api.csproj", "{2538BE23-8CBD-4310-84A6-2B17366E92EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alten.CarTracker.BackEndApi.Api", "Alten.CarTracker.BackEndApi.Api\Alten.CarTracker.BackEndApi.Api.csproj", "{2538BE23-8CBD-4310-84A6-2B17366E92EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alten.CarTracker.FrontEnd.UI", "Alten.CarTracker.FrontEnd.UI\Alten.CarTracker.FrontEnd.UI.csproj", "{23E0994B-5904-4D7B-AABE-2B6E2844F008}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alten.CarTracker.FrontEnd.UI", "Alten.CarTracker.FrontEnd.UI\Alten.CarTracker.FrontEnd.UI.csproj", "{23E0994B-5904-4D7B-AABE-2B6E2844F008}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alten.CarTracker.Services.StatusReceivedService", "Alten.CarTracker.Services.StatusReceivedService\Alten.CarTracker.Services.StatusReceivedService.csproj", "{12AA9F12-CB9B-4B4D-9B27-ACF4F2B0447A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alten.CarTracker.Services.StatusReceivedService", "Alten.CarTracker.Services.StatusReceivedService\Alten.CarTracker.Services.StatusReceivedService.csproj", "{12AA9F12-CB9B-4B4D-9B27-ACF4F2B0447A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alten.CarTracker.Services.NotificationService", "Alten.CarTracker.Services.NotificationService\Alten.CarTracker.Services.NotificationService.csproj", "{265FAEE8-B588-40A7-914D-E8CBAC0C6CB5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alten.CarTracker.Services.NotificationService", "Alten.CarTracker.Services.NotificationService\Alten.CarTracker.Services.NotificationService.csproj", "{265FAEE8-B588-40A7-914D-E8CBAC0C6CB5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alten.CarTracker.Infrastructure.Messaging", "Alten.CarTracker.Infrastructure.Messaging\Alten.CarTracker.Infrastructure.Messaging.csproj", "{9354A706-C3C2-4ECB-AFAF-E0CC00907710}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alten.CarTracker.Infrastructure.Messaging", "Alten.CarTracker.Infrastructure.Messaging\Alten.CarTracker.Infrastructure.Messaging.csproj", "{9354A706-C3C2-4ECB-AFAF-E0CC00907710}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alten.CarTracker.Infrastructure.ServiceDiscovery", "Alten.CarTracker.Infrastructure.ServiceDiscovery\Alten.CarTracker.Infrastructure.ServiceDiscovery.csproj", "{73DF8FA7-E816-4636-820C-C813DCE345CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alten.CarTracker.Infrastructure.ServiceDiscovery", "Alten.CarTracker.Infrastructure.ServiceDiscovery\Alten.CarTracker.Infrastructure.ServiceDiscovery.csproj", "{73DF8FA7-E816-4636-820C-C813DCE345CE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6. Simulator", "6. Simulator", "{537CE4D4-DF25-4F38-B02B-7BCCB73336E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alten.CarTracker.Infrastructure.Common", "Alten.CarTracker.Infrastructure.Common\Alten.CarTracker.Infrastructure.Common.csproj", "{FC117A67-9978-4C65-992C-F18FAC453C91}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alten.CarTracker.Infrastructure.Common", "Alten.CarTracker.Infrastructure.Common\Alten.CarTracker.Infrastructure.Common.csproj", "{FC117A67-9978-4C65-992C-F18FAC453C91}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{4F4003B2-FFD9-44B5-AAE9-F7F54E478E6E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,6 +83,10 @@ Global
 		{FC117A67-9978-4C65-992C-F18FAC453C91}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC117A67-9978-4C65-992C-F18FAC453C91}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC117A67-9978-4C65-992C-F18FAC453C91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F4003B2-FFD9-44B5-AAE9-F7F54E478E6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F4003B2-FFD9-44B5-AAE9-F7F54E478E6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F4003B2-FFD9-44B5-AAE9-F7F54E478E6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F4003B2-FFD9-44B5-AAE9-F7F54E478E6E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

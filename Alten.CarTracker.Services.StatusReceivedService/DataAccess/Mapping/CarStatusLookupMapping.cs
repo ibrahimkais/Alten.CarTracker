@@ -1,8 +1,8 @@
-﻿using Alten.CarTracker.BackEndApi.Domain.Model;
+﻿using Alten.CarTracker.Services.StatusReceivedService.Domain.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Alten.CarTracker.Api.ModelMapping
+namespace Alten.CarTracker.Services.StatusReceivedService.DataAccess.Mapping
 {
 	public class CarStatusLookupMapping : IEntityTypeConfiguration<CarStatusLookup>
 	{
