@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.UnitOfWork" Version="2.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Alten.CarTracker.BackEndApi.DataAccess\Alten.CarTracker.BackEndApi.DataAccess.csproj" />
+    <ProjectReference Include="..\Alten.CarTracker.BackEndApi.Domain\Alten.CarTracker.BackEndApi.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

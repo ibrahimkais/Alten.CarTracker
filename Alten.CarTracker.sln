@@ -1,0 +1,103 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.271
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Infrastructure", "1. Infrastructure", "{5BD11311-87FD-4305-9122-9902D1605276}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. BackEnd Api", "2. BackEnd Api", "{69839D41-BF34-4EAE-AAC3-D65474C77ABA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. FrontEnd", "3. FrontEnd", "{E9DA7EDB-F151-4844-9F52-552EF553513E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Services", "4. Services", "{6AC8211E-9F42-44C1-83DD-E7A3ADD1CF1B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5. Tests", "5. Tests", "{64BD8032-99F9-42BA-AEDD-5516266810B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alten.CarTracker.BackEndApi.Domain", "Alten.CarTracker.BackEndApi.Domain\Alten.CarTracker.BackEndApi.Domain.csproj", "{813F5F95-63BC-40D1-900B-F53F6744D7EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alten.CarTracker.BackEndApi.DataAccess", "Alten.CarTracker.BackEndApi.DataAccess\Alten.CarTracker.BackEndApi.DataAccess.csproj", "{16515D96-D137-460F-AC32-D3AA8240C5B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alten.CarTracker.BackEndApi.Application", "Alten.CarTracker.BackEndApi.Application\Alten.CarTracker.BackEndApi.Application.csproj", "{991D58DD-58CF-4EAB-B92C-9378D4B1AE2B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alten.CarTracker.BackEndApi.Api", "Alten.CarTracker.BackEndApi.Api\Alten.CarTracker.BackEndApi.Api.csproj", "{2538BE23-8CBD-4310-84A6-2B17366E92EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alten.CarTracker.FrontEnd.UI", "Alten.CarTracker.FrontEnd.UI\Alten.CarTracker.FrontEnd.UI.csproj", "{23E0994B-5904-4D7B-AABE-2B6E2844F008}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alten.CarTracker.Services.StatusReceivedService", "Alten.CarTracker.Services.StatusReceivedService\Alten.CarTracker.Services.StatusReceivedService.csproj", "{12AA9F12-CB9B-4B4D-9B27-ACF4F2B0447A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alten.CarTracker.Services.NotificationService", "Alten.CarTracker.Services.NotificationService\Alten.CarTracker.Services.NotificationService.csproj", "{265FAEE8-B588-40A7-914D-E8CBAC0C6CB5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alten.CarTracker.Infrastructure.Messaging", "Alten.CarTracker.Infrastructure.Messaging\Alten.CarTracker.Infrastructure.Messaging.csproj", "{9354A706-C3C2-4ECB-AFAF-E0CC00907710}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alten.CarTracker.Infrastructure.ServiceDiscovery", "Alten.CarTracker.Infrastructure.ServiceDiscovery\Alten.CarTracker.Infrastructure.ServiceDiscovery.csproj", "{73DF8FA7-E816-4636-820C-C813DCE345CE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6. Simulator", "6. Simulator", "{537CE4D4-DF25-4F38-B02B-7BCCB73336E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alten.CarTracker.Infrastructure.Common", "Alten.CarTracker.Infrastructure.Common\Alten.CarTracker.Infrastructure.Common.csproj", "{FC117A67-9978-4C65-992C-F18FAC453C91}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{813F5F95-63BC-40D1-900B-F53F6744D7EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{813F5F95-63BC-40D1-900B-F53F6744D7EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{813F5F95-63BC-40D1-900B-F53F6744D7EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{813F5F95-63BC-40D1-900B-F53F6744D7EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16515D96-D137-460F-AC32-D3AA8240C5B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16515D96-D137-460F-AC32-D3AA8240C5B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16515D96-D137-460F-AC32-D3AA8240C5B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16515D96-D137-460F-AC32-D3AA8240C5B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{991D58DD-58CF-4EAB-B92C-9378D4B1AE2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{991D58DD-58CF-4EAB-B92C-9378D4B1AE2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{991D58DD-58CF-4EAB-B92C-9378D4B1AE2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{991D58DD-58CF-4EAB-B92C-9378D4B1AE2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2538BE23-8CBD-4310-84A6-2B17366E92EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2538BE23-8CBD-4310-84A6-2B17366E92EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2538BE23-8CBD-4310-84A6-2B17366E92EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2538BE23-8CBD-4310-84A6-2B17366E92EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23E0994B-5904-4D7B-AABE-2B6E2844F008}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23E0994B-5904-4D7B-AABE-2B6E2844F008}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23E0994B-5904-4D7B-AABE-2B6E2844F008}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23E0994B-5904-4D7B-AABE-2B6E2844F008}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12AA9F12-CB9B-4B4D-9B27-ACF4F2B0447A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12AA9F12-CB9B-4B4D-9B27-ACF4F2B0447A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12AA9F12-CB9B-4B4D-9B27-ACF4F2B0447A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12AA9F12-CB9B-4B4D-9B27-ACF4F2B0447A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{265FAEE8-B588-40A7-914D-E8CBAC0C6CB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{265FAEE8-B588-40A7-914D-E8CBAC0C6CB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{265FAEE8-B588-40A7-914D-E8CBAC0C6CB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{265FAEE8-B588-40A7-914D-E8CBAC0C6CB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9354A706-C3C2-4ECB-AFAF-E0CC00907710}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9354A706-C3C2-4ECB-AFAF-E0CC00907710}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9354A706-C3C2-4ECB-AFAF-E0CC00907710}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9354A706-C3C2-4ECB-AFAF-E0CC00907710}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73DF8FA7-E816-4636-820C-C813DCE345CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73DF8FA7-E816-4636-820C-C813DCE345CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73DF8FA7-E816-4636-820C-C813DCE345CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73DF8FA7-E816-4636-820C-C813DCE345CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC117A67-9978-4C65-992C-F18FAC453C91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC117A67-9978-4C65-992C-F18FAC453C91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC117A67-9978-4C65-992C-F18FAC453C91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC117A67-9978-4C65-992C-F18FAC453C91}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{813F5F95-63BC-40D1-900B-F53F6744D7EA} = {69839D41-BF34-4EAE-AAC3-D65474C77ABA}
+		{16515D96-D137-460F-AC32-D3AA8240C5B5} = {69839D41-BF34-4EAE-AAC3-D65474C77ABA}
+		{991D58DD-58CF-4EAB-B92C-9378D4B1AE2B} = {69839D41-BF34-4EAE-AAC3-D65474C77ABA}
+		{2538BE23-8CBD-4310-84A6-2B17366E92EC} = {69839D41-BF34-4EAE-AAC3-D65474C77ABA}
+		{23E0994B-5904-4D7B-AABE-2B6E2844F008} = {E9DA7EDB-F151-4844-9F52-552EF553513E}
+		{12AA9F12-CB9B-4B4D-9B27-ACF4F2B0447A} = {6AC8211E-9F42-44C1-83DD-E7A3ADD1CF1B}
+		{265FAEE8-B588-40A7-914D-E8CBAC0C6CB5} = {6AC8211E-9F42-44C1-83DD-E7A3ADD1CF1B}
+		{9354A706-C3C2-4ECB-AFAF-E0CC00907710} = {5BD11311-87FD-4305-9122-9902D1605276}
+		{73DF8FA7-E816-4636-820C-C813DCE345CE} = {5BD11311-87FD-4305-9122-9902D1605276}
+		{FC117A67-9978-4C65-992C-F18FAC453C91} = {5BD11311-87FD-4305-9122-9902D1605276}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B193DB73-C91E-431D-9D3C-3950AD7E3734}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Alten.CarTracker.BackEndApi.Application.ApplicationServiceBase&lt;T, R&gt;" Collapsed="true">
+    <Position X="4.75" Y="1" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAYAAAAAAABAAABAAgAAAAAAAAEIAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>ApplicationServiceBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Alten.CarTracker.BackEndApi.Application.CustomerService" Collapsed="true">
+    <Position X="8" Y="2.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAABAAAABAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CustomerService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Alten.CarTracker.BackEndApi.Application.VehicleService" Collapsed="true">
+    <Position X="0.75" Y="2.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAABAAAAAAAAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>VehicleService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Alten.CarTracker.BackEndApi.Application.CarStatusService" Collapsed="true">
+    <Position X="4.25" Y="2.25" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAABAAAABAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CarStatusService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Alten.CarTracker.BackEndApi.Application.DTOs.VehicleDTO" Collapsed="true">
+    <Position X="4.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAFAAAAAAAAAAAgA=</HashCode>
+      <FileName>DTOs\VehicleDTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Alten.CarTracker.BackEndApi.Application.DTOs.CustomerDTO" Collapsed="true">
+    <Position X="4.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAgAAAAAAAAAQAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>DTOs\CustomerDTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Alten.CarTracker.BackEndApi.Application.DTOs.CarStatusDTO" Collapsed="true">
+    <Position X="4.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DTOs\CarStatusDTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Alten.CarTracker.BackEndApi.Application.Exceptions.CustomerIdException" Collapsed="true">
+    <Position X="8" Y="3.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions\CustomerIdException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Alten.CarTracker.BackEndApi.Application.IApplicationServiceBase&lt;T, R&gt;" Collapsed="true">
+    <Position X="0.75" Y="3.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAAAAAAAAAABAAAAAAAAAAAEIAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>IApplicationServiceBase.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Alten.CarTracker.BackEndApi.Application.ICarStatusService" Collapsed="true">
+    <Position X="0.75" Y="6" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ICarStatusService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Alten.CarTracker.BackEndApi.Application.ICustomerService" Collapsed="true">
+    <Position X="0.75" Y="4.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ICustomerService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Alten.CarTracker.BackEndApi.Application.IVehicleService" Collapsed="true">
+    <Position X="0.75" Y="5.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IVehicleService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
