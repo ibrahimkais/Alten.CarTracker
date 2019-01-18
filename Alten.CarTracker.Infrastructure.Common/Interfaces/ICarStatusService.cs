@@ -1,14 +1,12 @@
 ﻿using Alten.CarTracker.Infrastructure.Common.Commands;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace Alten.CarTracker.Infrastructure.Common.Interfaces
 {
 	public interface ICarStatusService
 	{
-		void SendStatus(UpdateStatus status);
+		Task AcquireStatus(UpdateStatus status);
 
-		void Ping();
+		Task Ping();
 	}
 }

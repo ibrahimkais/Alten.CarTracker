@@ -35,13 +35,13 @@ namespace Alten.CarTracker.Services.StatusReceivedService.MessageHandler
 			switch (messageType)
 			{
 				case "MinuteHasPassed":
-					await HandleAsync(messageObject.ToObject<MinutHasPassed>());
+					await HandleAsync(messageObject.ToObject<MinuteHasPassed>());
 					break;
 			}
 			return true;
 		}
 
-		private async Task<bool> HandleAsync(MinutHasPassed message)
+		private async Task<bool> HandleAsync(MinuteHasPassed message)
 		{
 
 			return true;

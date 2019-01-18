@@ -39,6 +39,8 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alten.CarTracker.Services.Simulator", "..\Alten.CarTracker.Services.Simulator\Alten.CarTracker.Services.Simulator.csproj", "{C8F9DD0C-EAA9-4614-AA3E-4699E1100522}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alten.CarTracker.Services.TimeService", "Alten.CarTracker.Services.TimeService\Alten.CarTracker.Services.TimeService.csproj", "{4EC98820-F277-4A4C-A9DC-FDBF068109D4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +95,10 @@ Global
 		{C8F9DD0C-EAA9-4614-AA3E-4699E1100522}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8F9DD0C-EAA9-4614-AA3E-4699E1100522}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8F9DD0C-EAA9-4614-AA3E-4699E1100522}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EC98820-F277-4A4C-A9DC-FDBF068109D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EC98820-F277-4A4C-A9DC-FDBF068109D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EC98820-F277-4A4C-A9DC-FDBF068109D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EC98820-F277-4A4C-A9DC-FDBF068109D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -109,6 +115,7 @@ Global
 		{73DF8FA7-E816-4636-820C-C813DCE345CE} = {5BD11311-87FD-4305-9122-9902D1605276}
 		{FC117A67-9978-4C65-992C-F18FAC453C91} = {5BD11311-87FD-4305-9122-9902D1605276}
 		{C8F9DD0C-EAA9-4614-AA3E-4699E1100522} = {537CE4D4-DF25-4F38-B02B-7BCCB73336E0}
+		{4EC98820-F277-4A4C-A9DC-FDBF068109D4} = {6AC8211E-9F42-44C1-83DD-E7A3ADD1CF1B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B193DB73-C91E-431D-9D3C-3950AD7E3734}

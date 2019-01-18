@@ -3,7 +3,7 @@ version: '3.4'
 services:
   rabbitmq:
     image: rabbitmq:3-management
-    container_name: car-rabbit
+    container_name: rabbit
     volumes:
       - rabbitmqdata:/var/lib/rabbitmq
     ports:
@@ -42,6 +42,7 @@ services:
 
   alten.cartracker.services.statusreceivedservice:
     image: car_tracker/statusreceivedservice
+    container_name: statusreceivedservice
     build:
       context: .
       dockerfile: Alten.CarTracker.Services.StatusReceivedService/Dockerfile
@@ -57,6 +58,7 @@ services:
 
   alten.cartracker.backendapi.api:
     image: car_tracker/backendapi
+    container_name: backendapi
     build:
       context: .
       dockerfile: Alten.CarTracker.BackEndApi.Api/Dockerfile
@@ -66,6 +68,32 @@ services:
       - sqlserver
     ports:
       - "5001"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ApplicationInsights:InstrumentationKey=${CarTrackerAIKey}
+
+  alten.cartracker.services.timeservice:
+    image: car_tracker/timeservice
+    container_name: timeservice
+    build:
+      context: .
+      dockerfile: Alten.CarTracker.Services.TimeService/Dockerfile
+    depends_on:
+      - rabbitmq
+    environment:
+      - CAR_TRACKER_ENVIRONMENT=Production
+
+  alten.cartracker.services.notificationservice:
+    image: car_tracker/notificationservice
+    container_name: notificationservice
+    build:
+      context: .
+      dockerfile: Alten.CarTracker.Services.NotificationService/Dockerfile
+    depends_on:
+      - discoveryservice
+      - rabbitmq
+    ports:
+      - "5002"
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - ApplicationInsights:InstrumentationKey=${CarTrackerAIKey}

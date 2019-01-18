@@ -30,9 +30,10 @@ namespace Alten.CarTracker.Infrastructure.ServiceDiscovery
 
 			var features = app.Properties["server.Features"] as FeatureCollection;
 			var addresses = features.Get<IServerAddressesFeature>();
-			var address = addresses.Addresses.First().Replace("*", ip);
+			string addressB = addresses.Addresses.First();
+			var address = addressB.Contains('*') ? addressB.Replace("*", ip) : addressB.Contains('+') ? addressB.Replace("+", ip) : addressB;
 
-			System.Console.WriteLine($"Address used for Consul registration: {address}");
+			System.Console.WriteLine($"Address used for Consul registration: {address} for app {consulConfig.Value.ServiceName}");
 
 			// Register service with consul
 			var uri = new Uri(address);

@@ -35,9 +35,9 @@ namespace Alten.CarTracker.BackEndApi.Api
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			string sqlConnectionString = Configuration.GetConnectionString("CarTrackerDbConnection");
+			string sqlConnectionString = Configuration["ConnectionStrings:CarTrackerDbConnection"];
 
-			services.AddDbContext<EfDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString(sqlConnectionString)))
+			services.AddDbContext<EfDbContext>(options => options.UseSqlServer(sqlConnectionString))
 				.AddUnitOfWork<EfDbContext>();
 
 			Mapper.Initialize(cfg => cfg.AddProfile<MappingProfile>());
@@ -77,7 +77,7 @@ namespace Alten.CarTracker.BackEndApi.Api
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-		public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApplicationLifetime lifetime, EfDbContext dbContext)
+		public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApplicationLifetime lifetime)
 		{
 			Log.Logger = new LoggerConfiguration()
 			   .ReadFrom.Configuration(Configuration)
