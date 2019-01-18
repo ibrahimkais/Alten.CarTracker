@@ -1,5 +1,7 @@
 ﻿using Alten.CarTracker.Infrastructure.Messaging;
 using Alten.CarTracker.Infrastructure.ServiceDiscovery;
+using Alten.CarTracker.Services.NotificationService.MappingProfiles;
+using Alten.CarTracker.Services.NotificationService.MessageHandler;
 using Alten.CarTracker.Services.NotificationService.SignalRHubs;
 using AutoMapper;
 using Consul;
@@ -31,12 +33,6 @@ namespace Alten.CarTracker.Services.NotificationService
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			var configSection = Configuration.GetSection("RabbitMQ");
-			string host = configSection["Host"];
-			string userName = configSection["UserName"];
-			string password = configSection["Password"];
-			services.AddTransient<IMessagePublisher>((sp) => new RabbitMQMessagePublisher(host, userName, password, "StatusReceivedEx"));
-
 			services.Configure<ConsulConfig>(Configuration.GetSection("consulConfig"));
 			services.AddSingleton<IConsulClient, ConsulClient>(p => new ConsulClient(consulConfig =>
 			{
@@ -48,6 +44,16 @@ namespace Alten.CarTracker.Services.NotificationService
 			services.AddAutoMapper();
 
 			services.AddSignalR();
+
+			var configSection = Configuration.GetSection("RabbitMQ");
+			string host = configSection["Host"];
+			string userName = configSection["UserName"];
+			string password = configSection["Password"];
+			string exchange = configSection["Exchange"];
+
+			services.AddTransient<IMessagePublisher>((sp) => new RabbitMQMessagePublisher(host, userName, password, exchange));
+			services.AddTransient<IMessageHandler>((sp) => new RabbitMQMessageHandler(host, userName, password, exchange, null, null));
+			services.AddSingleton<StatusReceivedMessageHandler>();
 
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 

@@ -4,4 +4,9 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Alten.CarTracker.Infrastructure.Messaging\Alten.CarTracker.Infrastructure.Messaging.csproj" />
+    <ProjectReference Include="..\Alten.CarTracker.Infrastructure.ServiceDiscovery\Alten.CarTracker.Infrastructure.ServiceDiscovery.csproj" />
+  </ItemGroup>
+
 </Project>

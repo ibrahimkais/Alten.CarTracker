@@ -25,14 +25,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Alten.CarTracker.Infrastructure.Common\Alten.CarTracker.Infrastructure.Common.csproj" />
     <ProjectReference Include="..\Alten.CarTracker.Infrastructure.Messaging\Alten.CarTracker.Infrastructure.Messaging.csproj" />
     <ProjectReference Include="..\Alten.CarTracker.Infrastructure.ServiceDiscovery\Alten.CarTracker.Infrastructure.ServiceDiscovery.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="MappingProfiles\" />
-    <Folder Include="Events\" />
-    <Folder Include="MessageHandler\" />
   </ItemGroup>
 
 </Project>

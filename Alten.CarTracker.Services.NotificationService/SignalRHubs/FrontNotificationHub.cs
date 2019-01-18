@@ -1,16 +1,14 @@
-﻿using Microsoft.AspNetCore.SignalR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Alten.CarTracker.Services.NotificationService.DTOs;
+using Microsoft.AspNetCore.SignalR;
 using System.Threading.Tasks;
 
 namespace Alten.CarTracker.Services.NotificationService.SignalRHubs
 {
-	public class FrontNotificationHub: Hub
+	public class FrontNotificationHub : Hub
 	{
-		public Task SendMessageToGroup(string message)
+		public Task SendMessageToGroup(StatusReceivedDTO message)
 		{
-			return Clients.Group("FrontUI").SendAsync("ReceiveMessage", message);
+			return Clients.Group("FrontUI").SendAsync("StatusMessage", message);
 		}
 	}
 }

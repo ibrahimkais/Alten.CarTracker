@@ -1,9 +1,9 @@
 ﻿using Alten.CarTracker.Infrastructure.Messaging;
 using System;
 
-namespace Alten.CarTracker.Services.StatusReceivedService.Commands
+namespace Alten.CarTracker.Infrastructure.Common.Events
 {
-	public class UpdateStatus : Command
+	public class StatusReceived : Event
 	{
 		public readonly string VinCode;
 		public readonly DateTime ReceivedDate;
@@ -11,7 +11,7 @@ namespace Alten.CarTracker.Services.StatusReceivedService.Commands
 		public readonly double Y;
 		public readonly int StatusId;
 
-		public UpdateStatus(Guid messageId, string vinCode, DateTime receivedDate, double x, double y, int statusId) : base(messageId)
+		public StatusReceived(Guid messageId, string vinCode, DateTime receivedDate, double x, double y, int statusId) : base(messageId)
 		{
 			VinCode = vinCode;
 			ReceivedDate = receivedDate;

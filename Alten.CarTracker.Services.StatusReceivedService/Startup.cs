@@ -44,12 +44,6 @@ namespace Alten.CarTracker.Services.StatusReceivedService
 				)
 			);
 
-			var configSection = Configuration.GetSection("RabbitMQ");
-			string host = configSection["Host"];
-			string userName = configSection["UserName"];
-			string password = configSection["Password"];
-			services.AddTransient<IMessagePublisher>((sp) => new RabbitMQMessagePublisher(host, userName, password, "StatusReceivedEx"));
-
 			services.Configure<ConsulConfig>(Configuration.GetSection("consulConfig"));
 			services.AddSingleton<IConsulClient, ConsulClient>(p => new ConsulClient(consulConfig =>
 			{
@@ -59,6 +53,16 @@ namespace Alten.CarTracker.Services.StatusReceivedService
 
 			Mapper.Initialize(cfg => cfg.AddProfile<MappingProfile>());
 			services.AddAutoMapper();
+
+
+			var configSection = Configuration.GetSection("RabbitMQ");
+			string host = configSection["Host"];
+			string userName = configSection["UserName"];
+			string password = configSection["Password"];
+			string exchange = configSection["Exchange"];
+
+			services.AddTransient<IMessagePublisher>((sp) => new RabbitMQMessagePublisher(host, userName, password, exchange));
+			services.AddTransient<IMessageHandler>((sp) => new RabbitMQMessageHandler(host, userName, password, exchange, null, null));
 
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 

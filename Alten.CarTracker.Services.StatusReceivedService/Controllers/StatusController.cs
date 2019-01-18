@@ -1,8 +1,8 @@
-﻿using Alten.CarTracker.Infrastructure.Messaging;
-using Alten.CarTracker.Services.StatusReceivedService.Commands;
+﻿using Alten.CarTracker.Infrastructure.Common.Commands;
+using Alten.CarTracker.Infrastructure.Common.Events;
+using Alten.CarTracker.Infrastructure.Messaging;
 using Alten.CarTracker.Services.StatusReceivedService.DataAccess;
 using Alten.CarTracker.Services.StatusReceivedService.Domain.Model;
-using Alten.CarTracker.Services.StatusReceivedService.Events;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

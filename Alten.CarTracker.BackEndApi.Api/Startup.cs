@@ -47,7 +47,9 @@ namespace Alten.CarTracker.BackEndApi.Api
 			string host = configSection["Host"];
 			string userName = configSection["UserName"];
 			string password = configSection["Password"];
-			services.AddTransient<IMessagePublisher>((sp) => new RabbitMQMessagePublisher(host, userName, password, "StatusReceivedEx"));
+			string exchange = configSection["Exchange"];
+
+			services.AddTransient<IMessagePublisher>((sp) => new RabbitMQMessagePublisher(host, userName, password, exchange));
 
 			services.Configure<ConsulConfig>(Configuration.GetSection("consulConfig"));
 			services.AddSingleton<IConsulClient, ConsulClient>(p => new ConsulClient(consulConfig =>
