@@ -11,7 +11,7 @@ using NetTopologySuite.Geometries;
 namespace Alten.CarTracker.Services.StatusReceivedService.Migrations
 {
     [DbContext(typeof(EfDbContext))]
-    [Migration("20190117103440_InitialCreate")]
+    [Migration("20190119124348_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

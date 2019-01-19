@@ -1,5 +1,6 @@
 ﻿using Alten.CarTracker.Infrastructure.Common.Interfaces;
 using Alten.CarTracker.Infrastructure.Messaging;
+using Alten.CarTracker.Services.StatusReceivedService.Application;
 using Alten.CarTracker.Services.StatusReceivedService.AutoMapperProfiles;
 using Alten.CarTracker.Services.StatusReceivedService.Controllers;
 using Alten.CarTracker.Services.StatusReceivedService.DataAccess;
@@ -12,7 +13,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System.Net;
 
 namespace Alten.CarTracker.Services.StatusReceivedService
 {
@@ -46,41 +46,42 @@ namespace Alten.CarTracker.Services.StatusReceivedService
 			Mapper.Initialize(cfg => cfg.AddProfile<MappingProfile>());
 			services.AddAutoMapper();
 
-
 			var configSection = Configuration.GetSection("RabbitMQ");
 			string host = configSection["Host"];
 			string userName = configSection["UserName"];
 			string password = configSection["Password"];
 			string exchange = configSection["Exchange"];
 
+			//https://medium.com/volosoft/asp-net-core-dependency-injection-best-practices-tips-tricks-c6e9c67f9d96
+
+			services.AddSingleton(sp => StatusCheckList.Instance);
+
+
 			services.AddTransient<IMessagePublisher>((sp) => new RabbitMQMessagePublisher(host, userName, password, exchange));
-			services.AddTransient<IMessageHandler>((sp) => new RabbitMQMessageHandler(host, userName, password, exchange, null, null));
-			services.AddSingleton<MinutHasPassedMessageHandler>();
+			services.AddSingleton((sp) => new RabbitMQMessageHandler(host, userName, password, exchange, "MinuteHasPassed", "MinuteHasPassed"));
 
 			services.AddIpc(builder =>
 			{
-				builder.AddNamedPipe(options =>
-				{
-					options.ThreadCount = 2;
-				})
+				builder.AddNamedPipe()
 				.AddService<ICarStatusService, CarStatusService>();
 			});
-
-			new IpcServiceHostBuilder(services.BuildServiceProvider())
-				.AddNamedPipeEndpoint<ICarStatusService>(name: "endpointNP", pipeName: "CarStatusPipe")
-				.AddTcpEndpoint<ICarStatusService>(name: "endpointTCP", ipEndpoint: IPAddress.Loopback, port: 25000)
-				.Build()
-				.Run();
 
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-		public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApplicationLifetime lifetime)
+		public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApplicationLifetime lifetime, EfDbContext dbContext, IMapper mapper)
 		{
 			app.UseMvc();
 			app.UseDefaultFiles();
 			app.UseStaticFiles();
+
+			var messagePublisher = app.ApplicationServices.GetService<IMessagePublisher>();
+
+			MinutHasPassedMessageHandler minutHasPassedMessageHandler = new MinutHasPassedMessageHandler(mapper, messagePublisher, dbContext);
+
+			var handler = app.ApplicationServices.GetService<RabbitMQMessageHandler>();
+			handler.Start(minutHasPassedMessageHandler);
 		}
 	}
 }

@@ -1,5 +1,5 @@
-﻿using Alten.CarTracker.Infrastructure.Common.Events;
-using Alten.CarTracker.Services.NotificationService.DTOs;
+﻿using Alten.CarTracker.Infrastructure.Common.DTOs;
+using Alten.CarTracker.Infrastructure.Common.Events;
 using AutoMapper;
 
 namespace Alten.CarTracker.Services.NotificationService.MappingProfiles

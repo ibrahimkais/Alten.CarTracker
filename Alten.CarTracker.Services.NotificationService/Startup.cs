@@ -6,6 +6,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -39,12 +40,9 @@ namespace Alten.CarTracker.Services.NotificationService
 			string password = configSection["Password"];
 			string exchange = configSection["Exchange"];
 
-			services.AddTransient<IMessagePublisher>((sp) => new RabbitMQMessagePublisher(host, userName, password, exchange));
-			services.AddTransient<IMessageHandler>((sp) => new RabbitMQMessageHandler(host, userName, password, exchange, null, null));
-			services.AddSingleton<StatusReceivedMessageHandler>();
+			services.AddSingleton((sp) => new RabbitMQMessageHandler(host, userName, password, exchange, "StatusReceived", "StatusReceived"));
 
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,6 +56,11 @@ namespace Alten.CarTracker.Services.NotificationService
 			{
 				route.MapHub<FrontNotificationHub>("/frontNotificationHub");
 			});
+
+			var hubContext = app.ApplicationServices.GetService<IHubContext<FrontNotificationHub>>();
+			StatusReceivedMessageHandler statusReceivedMessageHandler = new StatusReceivedMessageHandler(Mapper.Instance, hubContext);
+			var handler = app.ApplicationServices.GetService<RabbitMQMessageHandler>();
+			handler.Start(statusReceivedMessageHandler);
 		}
 	}
 }

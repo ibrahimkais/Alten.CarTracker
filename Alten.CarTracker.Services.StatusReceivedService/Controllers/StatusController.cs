@@ -1,6 +1,6 @@
 ﻿using Alten.CarTracker.Infrastructure.Common.Commands;
-using Alten.CarTracker.Infrastructure.Common.Events;
-using Alten.CarTracker.Infrastructure.Messaging;
+using Alten.CarTracker.Infrastructure.Common.DTOs;
+using Alten.CarTracker.Services.StatusReceivedService.Application;
 using Alten.CarTracker.Services.StatusReceivedService.DataAccess;
 using Alten.CarTracker.Services.StatusReceivedService.Domain.Model;
 using AutoMapper;
@@ -16,45 +16,40 @@ namespace Alten.CarTracker.Services.StatusReceivedService.Controllers
 	[ApiController]
 	public class StatusController : ControllerBase
 	{
-		private readonly IMessagePublisher _messagePublisher;
+		//private readonly IMessagePublisher _messagePublisher;
 		private readonly EfDbContext _dbContext;
+		//private readonly IMapper _mapper;
+
 		private readonly IMapper _mapper;
 
-		public StatusController(EfDbContext efDbContext, IMessagePublisher messagePublisher, IMapper mapper)
+		//public StatusController(EfDbContext efDbContext, IMessagePublisher messagePublisher, IMapper mapper)
+		public StatusController(EfDbContext efDbContext, IMapper mapper)
 		{
 			_dbContext = efDbContext;
-			_messagePublisher = messagePublisher;
+			//_messagePublisher = messagePublisher;
+			//_mapper = mapper;
+
 			_mapper = mapper;
 		}
 
 		[HttpPost]
-		public async Task<dynamic> Post([FromBody] UpdateStatus command)
+		public async Task<dynamic> UpdateVehicleStatus([FromForm] StatusReceivedDTO command)
 		{
 			try
 			{
 				if (ModelState.IsValid)
 				{
-					Status status = _mapper.Map<UpdateStatus, Status>(command);
+					UpdateStatus message = _mapper.Map<UpdateStatus>(command);
+					StatusCheckList.Instance.ReceviedMessages.Enqueue(message);
+
+					Status status = Mapper.Map<UpdateStatus, Status>(message);
 					_dbContext.Add(status);
-					int result = await _dbContext.SaveChangesAsync();
+					await _dbContext.SaveChangesAsync();
 
-					// send event
-					StatusReceived message = Mapper.Map<StatusReceived>(command);
-					await _messagePublisher.PublishMessageAsync(message.MessageType, message, "StatusReceived");
-
-					//return result
-					return result > 0 ? new
-					{
-						Saved = true,
-					}
-					: new
-					{
-						Saved = false,
-					};
+					return Ok();
 				}
 				return BadRequest();
 			}
-
 			catch (DbUpdateException)
 			{
 				ModelState.AddModelError("", "Unable to save changes. " +
@@ -67,7 +62,7 @@ namespace Alten.CarTracker.Services.StatusReceivedService.Controllers
 		[HttpGet]
 		public async Task<ActionResult<IList<CarStatusLookup>>> GetCarStatusLookup()
 		{
-			List<CarStatusLookup> carStatusLookups = await _dbContext.Query<CarStatusLookup>().ToListAsync();
+			List<CarStatusLookup> carStatusLookups = await _dbContext.Set<CarStatusLookup>().ToListAsync();
 			return carStatusLookups;
 		}
 	}

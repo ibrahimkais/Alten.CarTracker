@@ -1,4 +1,4 @@
-﻿using Alten.CarTracker.Services.NotificationService.DTOs;
+﻿using Alten.CarTracker.Infrastructure.Common.DTOs;
 using Microsoft.AspNetCore.SignalR;
 using System.Threading.Tasks;
 

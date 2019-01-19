@@ -5,8 +5,8 @@ namespace Alten.CarTracker.Infrastructure.Common.Interfaces
 {
 	public interface ICarStatusService
 	{
-		Task AcquireStatus(UpdateStatus status);
+		void AcquireStatus(UpdateStatus status);
 
-		Task Ping();
+		void Ping();
 	}
 }

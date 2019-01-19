@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Alten.CarTracker.Services.NotificationService.DTOs
+namespace Alten.CarTracker.Infrastructure.Common.DTOs
 {
 	public class StatusReceivedDTO
 	{
