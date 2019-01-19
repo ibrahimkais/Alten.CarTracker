@@ -11,6 +11,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 
+//https://cecilphillip.com/using-consul-for-service-discovery-with-asp-net-core/
 namespace Alten.CarTracker.Infrastructure.ServiceDiscovery
 {
 	public static class ApplicationBuilderExtensions
@@ -41,7 +42,7 @@ namespace Alten.CarTracker.Infrastructure.ServiceDiscovery
 			{
 				ID = $"{consulConfig.Value.ServiceID}-{hostname}-{uri.Port}",
 				Name = consulConfig.Value.ServiceName,
-				Address = $"{uri.Host}",
+				Address = $"{uri.Scheme}://{uri.Host}",
 				Port = uri.Port
 			};
 

@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Serilog;
 
 namespace Alten.CarTracker.BackEndApi.Api
 {
@@ -13,9 +12,6 @@ namespace Alten.CarTracker.BackEndApi.Api
 
 		public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
 			WebHost.CreateDefaultBuilder(args)
-			.UseApplicationInsights()
-				.UseSerilog()
-				.UseHealthChecks("/hc")
 				.UseStartup<Startup>();
 	}
 }

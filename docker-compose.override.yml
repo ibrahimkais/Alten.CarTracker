@@ -4,20 +4,20 @@ services:
   alten.cartracker.services.statusreceivedservice:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://*:5001
+      - ASPNETCORE_URLS=http://*:12001
       - ASPNETCORE_HTTPS_PORT=0
     ports:
-      - "5001"
+      - "12001"
     volumes:
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
   alten.cartracker.backendapi.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://*:5000
+      - ASPNETCORE_URLS=http://*:12000
       - ASPNETCORE_HTTPS_PORT=0
     ports:
-      - "5000"
+      - "12000"
     volumes:
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
@@ -25,10 +25,10 @@ services:
   alten.cartracker.services.notificationservice:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://*:5002
+      - ASPNETCORE_URLS=http://*:12002
       - ASPNETCORE_HTTPS_PORT=0
     ports:
-      - "5002"
+      - "12002"
     volumes:
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro

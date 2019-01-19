@@ -1,18 +1,13 @@
 ﻿using Alten.CarTracker.Infrastructure.Messaging;
-using Alten.CarTracker.Infrastructure.ServiceDiscovery;
 using Alten.CarTracker.Services.NotificationService.MappingProfiles;
 using Alten.CarTracker.Services.NotificationService.MessageHandler;
 using Alten.CarTracker.Services.NotificationService.SignalRHubs;
 using AutoMapper;
-using Consul;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Serilog;
-using Swashbuckle.AspNetCore.Swagger;
-using System;
 
 namespace Alten.CarTracker.Services.NotificationService
 {
@@ -33,13 +28,6 @@ namespace Alten.CarTracker.Services.NotificationService
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.Configure<ConsulConfig>(Configuration.GetSection("consulConfig"));
-			services.AddSingleton<IConsulClient, ConsulClient>(p => new ConsulClient(consulConfig =>
-			{
-				var address = Configuration["consulConfig:address"];
-				consulConfig.Address = new Uri(address);
-			}));
-
 			Mapper.Initialize(cfg => cfg.AddProfile<MappingProfile>());
 			services.AddAutoMapper();
 
@@ -57,24 +45,11 @@ namespace Alten.CarTracker.Services.NotificationService
 
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-			services.AddSwaggerGen(c =>
-			{
-				c.SwaggerDoc("v1", new Info { Title = "NotificationService", Version = "v1" });
-			});
-
-			services.AddHealthChecks(checks =>
-			{
-				checks.WithDefaultCacheDuration(TimeSpan.FromSeconds(1));
-			});
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApplicationLifetime lifetime)
 		{
-			Log.Logger = new LoggerConfiguration()
-			   .ReadFrom.Configuration(Configuration)
-			   .CreateLogger();
-
 			app.UseMvc();
 			app.UseDefaultFiles();
 			app.UseStaticFiles();
@@ -83,15 +58,6 @@ namespace Alten.CarTracker.Services.NotificationService
 			{
 				route.MapHub<FrontNotificationHub>("/frontNotificationHub");
 			});
-
-			// Enable middleware to serve generated Swagger as a JSON endpoint.
-			app.UseSwagger();
-
-			// Enable middleware to serve swagger-ui (HTML, JS, CSS etc.), specifying the Swagger JSON endpoint.
-			app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "NotificationService - v1"));
-
-			// register service in Consul
-			app.RegisterWithConsul(lifetime);
 		}
 	}
 }

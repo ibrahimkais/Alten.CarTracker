@@ -1,8 +1,8 @@
 FROM microsoft/dotnet:2.2-aspnetcore-runtime AS base
 WORKDIR /app
-EXPOSE 5001
-ENV ASPNETCORE_URLS http://*:5001
-HEALTHCHECK --interval=30s --timeout=3s --retries=1 CMD curl --silent --fail http://localhost:5001/hc || exit 1
+EXPOSE 12001
+ENV ASPNETCORE_URLS http://*:12001
+HEALTHCHECK --interval=30s --timeout=3s --retries=1 CMD curl --silent --fail http://localhost:12001/hc || exit 1
 ENV WEBSITE_SITE_NAME StatusReceivedService
 
 FROM microsoft/dotnet:2.2-sdk AS build

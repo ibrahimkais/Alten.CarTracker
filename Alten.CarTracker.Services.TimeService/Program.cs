@@ -1,6 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
-using Alten.CarTracker.Infrastructure.Messaging;
-using Serilog;
+﻿using Alten.CarTracker.Infrastructure.Messaging;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.IO;
 using System.Threading;
@@ -22,11 +21,11 @@ namespace Alten.CarTracker.Services.TimeService
 				.AddJsonFile($"appsettings.{_env}.json", optional: false)
 				.Build();
 
-			Log.Logger = new LoggerConfiguration()
-				.ReadFrom.Configuration(Config)
-				.CreateLogger();
+			//Log.Logger = new LoggerConfiguration()
+			//	.ReadFrom.Configuration(Config)
+			//	.CreateLogger();
 
-			Log.Information($"Environment: {_env}");
+			//Log.Information($"Environment: {_env}");
 		}
 
 		static void Main(string[] args)
@@ -45,14 +44,14 @@ namespace Alten.CarTracker.Services.TimeService
 
 			if (_env == "Development")
 			{
-				Log.Information("TimeService service started.");
+				//Log.Information("TimeService service started.");
 				Console.WriteLine("Press any key to stop...");
 				Console.ReadKey(true);
 				manager.Stop();
 			}
 			else
 			{
-				Log.Information("Time service started.");
+				//Log.Information("Time service started.");
 				while (true)
 				{
 					Thread.Sleep(10000);

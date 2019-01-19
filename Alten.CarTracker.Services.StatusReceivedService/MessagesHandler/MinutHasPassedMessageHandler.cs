@@ -2,6 +2,7 @@
 using Alten.CarTracker.Infrastructure.Messaging;
 using AutoMapper;
 using Newtonsoft.Json.Linq;
+using System;
 using System.Threading.Tasks;
 
 namespace Alten.CarTracker.Services.StatusReceivedService.MessageHandler
@@ -32,6 +33,7 @@ namespace Alten.CarTracker.Services.StatusReceivedService.MessageHandler
 		public async Task<bool> HandleMessageAsync(string messageType, string message)
 		{
 			JObject messageObject = MessageSerializer.Deserialize(message);
+			Console.WriteLine($"Message Received: MessageType {messageType}");
 			switch (messageType)
 			{
 				case "MinuteHasPassed":
@@ -43,7 +45,7 @@ namespace Alten.CarTracker.Services.StatusReceivedService.MessageHandler
 
 		private async Task<bool> HandleAsync(MinuteHasPassed message)
 		{
-
+			Console.WriteLine($"Message Handled");
 			return true;
 		}
 	}

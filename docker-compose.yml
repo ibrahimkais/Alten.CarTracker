@@ -25,21 +25,6 @@ services:
       - MSSQL_PID=Developer
       - SA_PASSWORD=P@ssw0rd
 
-  discoveryservice:
-    image: consul:latest
-    container_name: discoveryservice
-    ports:
-      - "8500:8500"
-    command: ["agent", "-dev", "-client", "0.0.0.0", "-bind", "0.0.0.0"]  
-
-  logserver:
-    image: datalust/seq:latest
-    container_name: logserver
-    ports:
-      - "5341:80"
-    environment:
-      - ACCEPT_EULA=Y 
-
   alten.cartracker.services.statusreceivedservice:
     image: car_tracker/statusreceivedservice
     container_name: statusreceivedservice
@@ -47,11 +32,10 @@ services:
       context: .
       dockerfile: Alten.CarTracker.Services.StatusReceivedService/Dockerfile
     depends_on:
-      - discoveryservice
       - rabbitmq
       - sqlserver
     ports:
-      - "5000"
+      - "12001:12001"
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - ApplicationInsights:InstrumentationKey=${CarTrackerAIKey}
@@ -63,11 +47,10 @@ services:
       context: .
       dockerfile: Alten.CarTracker.BackEndApi.Api/Dockerfile
     depends_on:
-      - discoveryservice
       - rabbitmq
       - sqlserver
     ports:
-      - "5001"
+      - "12000:12000"
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - ApplicationInsights:InstrumentationKey=${CarTrackerAIKey}
@@ -90,10 +73,9 @@ services:
       context: .
       dockerfile: Alten.CarTracker.Services.NotificationService/Dockerfile
     depends_on:
-      - discoveryservice
       - rabbitmq
     ports:
-      - "5002"
+      - "12002:12002"
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - ApplicationInsights:InstrumentationKey=${CarTrackerAIKey}

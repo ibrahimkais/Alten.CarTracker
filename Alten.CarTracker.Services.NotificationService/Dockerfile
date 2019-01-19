@@ -1,8 +1,8 @@
 FROM microsoft/dotnet:2.2-aspnetcore-runtime AS base
 WORKDIR /app
-EXPOSE 5002
-ENV ASPNETCORE_URLS http://*:5002
-HEALTHCHECK --interval=30s --timeout=3s --retries=1 CMD curl --silent --fail http://localhost:5002/hc || exit 1
+EXPOSE 12002
+ENV ASPNETCORE_URLS http://*:12002
+HEALTHCHECK --interval=30s --timeout=3s --retries=1 CMD curl --silent --fail http://localhost:12002/hc || exit 1
 ENV WEBSITE_SITE_NAME NotificationService
 
 FROM microsoft/dotnet:2.2-sdk AS build
