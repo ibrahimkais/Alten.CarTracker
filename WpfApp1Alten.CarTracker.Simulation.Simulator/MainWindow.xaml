@@ -4,9 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1Alten.CarTracker.Simulation.Simulator"
+        xmlns:views="clr-namespace:WpfApp1Alten.CarTracker.Simulation.Simulator.Views"
         xmlns:WPFSpark="clr-namespace:WPFSpark;assembly=WPFSpark" xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" x:Class="WpfApp1Alten.CarTracker.Simulation.Simulator.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="563.453" Width="800">
+        Title="MainWindow" Height="626.03" Width="1190.358">
     <Window.Resources>
         <SolidColorBrush x:Key="ListBorder" Color="#828790"/>
         <Style x:Key="ListViewStyle1" TargetType="{x:Type ListView}">
@@ -47,17 +48,12 @@
     </Window.Resources>
     <Grid Margin="0,0,0,-2">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="347*"/>
-            <ColumnDefinition Width="127*"/>
-            <ColumnDefinition Width="318*"/>
+            <ColumnDefinition Width="415*"/>
+            <ColumnDefinition Width="767*"/>
         </Grid.ColumnDefinitions>
-        <ListView Height="514" Margin="10,10,15,0" VerticalAlignment="Top" Style="{DynamicResource ListViewStyle1}">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
-        </ListView>
-
+        <views:CarView x:Name="CarViewControl" Margin="10,32,39,10" Width="Auto" Height="Auto"/>
+        <views:LogView x:Name="LogViewControl" Margin="10,10,0,10" HorizontalAlignment="Left" Height="Auto" Grid.Column="1" Width="747"/>
+        <Label Content="Connection" HorizontalAlignment="Left" Margin="236,6,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label Content="Status" HorizontalAlignment="Left" Margin="324,6,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
     </Grid>
 </Window>
