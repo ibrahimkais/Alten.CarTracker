@@ -1,12 +1,9 @@
-﻿using Alten.CarTracker.Infrastructure.Common.Interfaces;
-using Alten.CarTracker.Infrastructure.Messaging;
+﻿using Alten.CarTracker.Infrastructure.Messaging;
 using Alten.CarTracker.Services.StatusReceivedService.Application;
 using Alten.CarTracker.Services.StatusReceivedService.AutoMapperProfiles;
-using Alten.CarTracker.Services.StatusReceivedService.Controllers;
 using Alten.CarTracker.Services.StatusReceivedService.DataAccess;
 using Alten.CarTracker.Services.StatusReceivedService.MessageHandler;
 using AutoMapper;
-using JKang.IpcServiceFramework;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -59,12 +56,6 @@ namespace Alten.CarTracker.Services.StatusReceivedService
 
 			services.AddTransient<IMessagePublisher>((sp) => new RabbitMQMessagePublisher(host, userName, password, exchange));
 			services.AddSingleton((sp) => new RabbitMQMessageHandler(host, userName, password, exchange, "MinuteHasPassed", "MinuteHasPassed"));
-
-			services.AddIpc(builder =>
-			{
-				builder.AddNamedPipe()
-				.AddService<ICarStatusService, CarStatusService>();
-			});
 
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 		}

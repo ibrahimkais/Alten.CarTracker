@@ -42,20 +42,10 @@ namespace Alten.CarTracker.Services.TimeService
 			TimeManager manager = new TimeManager(messagePublisher);
 			manager.Start();
 
-			if (_env == "Development")
+			//Log.Information("Time service started.");
+			while (true)
 			{
-				//Log.Information("TimeService service started.");
-				Console.WriteLine("Press any key to stop...");
-				Console.ReadKey(true);
-				manager.Stop();
-			}
-			else
-			{
-				//Log.Information("Time service started.");
-				while (true)
-				{
-					Thread.Sleep(10000);
-				}
+				Thread.Sleep(59999);
 			}
 		}
 	}

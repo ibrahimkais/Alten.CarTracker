@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace Alten.CarTracker.Services.NotificationService
 {
@@ -12,6 +13,8 @@ namespace Alten.CarTracker.Services.NotificationService
 
 		public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
 			WebHost.CreateDefaultBuilder(args)
+				.UseKestrel()
+				.UseContentRoot(Directory.GetCurrentDirectory())
 				.UseStartup<Startup>();
 	}
 }

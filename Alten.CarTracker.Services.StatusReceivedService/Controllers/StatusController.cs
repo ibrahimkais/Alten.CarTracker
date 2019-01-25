@@ -7,6 +7,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -33,12 +34,14 @@ namespace Alten.CarTracker.Services.StatusReceivedService.Controllers
 		}
 
 		[HttpPost]
-		public async Task<dynamic> UpdateVehicleStatus([FromForm] StatusReceivedDTO command)
+		public async Task<dynamic> UpdateVehicleStatus([FromBody] JObject data)
 		{
 			try
 			{
 				if (ModelState.IsValid)
 				{
+					StatusReceivedDTO command = data.ToObject<StatusReceivedDTO>();
+
 					UpdateStatus message = _mapper.Map<UpdateStatus>(command);
 					StatusCheckList.Instance.ReceviedMessages.Enqueue(message);
 

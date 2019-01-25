@@ -37,7 +37,7 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alten.CarTracker.Services.TimeService", "Alten.CarTracker.Services.TimeService\Alten.CarTracker.Services.TimeService.csproj", "{4EC98820-F277-4A4C-A9DC-FDBF068109D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp1Alten.CarTracker.Simulation.Simulator", "WpfApp1Alten.CarTracker.Simulation.Simulator\WpfApp1Alten.CarTracker.Simulation.Simulator.csproj", "{B2C34ACA-6922-4CC2-864B-407FFBAC95AB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alten.CarTracker.Simulation.Simulator", "Alten.CarTracker.Simulation.Simulator\Alten.CarTracker.Simulation.Simulator.csproj", "{7B1D72C0-D2A1-4C5E-B045-A88FB167C690}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -89,10 +89,10 @@ Global
 		{4EC98820-F277-4A4C-A9DC-FDBF068109D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4EC98820-F277-4A4C-A9DC-FDBF068109D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4EC98820-F277-4A4C-A9DC-FDBF068109D4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B2C34ACA-6922-4CC2-864B-407FFBAC95AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B2C34ACA-6922-4CC2-864B-407FFBAC95AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B2C34ACA-6922-4CC2-864B-407FFBAC95AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B2C34ACA-6922-4CC2-864B-407FFBAC95AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B1D72C0-D2A1-4C5E-B045-A88FB167C690}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B1D72C0-D2A1-4C5E-B045-A88FB167C690}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B1D72C0-D2A1-4C5E-B045-A88FB167C690}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B1D72C0-D2A1-4C5E-B045-A88FB167C690}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -108,7 +108,7 @@ Global
 		{9354A706-C3C2-4ECB-AFAF-E0CC00907710} = {5BD11311-87FD-4305-9122-9902D1605276}
 		{FC117A67-9978-4C65-992C-F18FAC453C91} = {5BD11311-87FD-4305-9122-9902D1605276}
 		{4EC98820-F277-4A4C-A9DC-FDBF068109D4} = {6AC8211E-9F42-44C1-83DD-E7A3ADD1CF1B}
-		{B2C34ACA-6922-4CC2-864B-407FFBAC95AB} = {537CE4D4-DF25-4F38-B02B-7BCCB73336E0}
+		{7B1D72C0-D2A1-4C5E-B045-A88FB167C690} = {537CE4D4-DF25-4F38-B02B-7BCCB73336E0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B193DB73-C91E-431D-9D3C-3950AD7E3734}

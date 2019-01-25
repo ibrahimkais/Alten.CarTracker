@@ -34,6 +34,7 @@ services:
     depends_on:
       - rabbitmq
       - sqlserver
+      - alten.cartracker.services.timeservice
     ports:
       - "12001:12001"
     environment:
@@ -74,11 +75,28 @@ services:
       dockerfile: Alten.CarTracker.Services.NotificationService/Dockerfile
     depends_on:
       - rabbitmq
+      - alten.cartracker.services.statusreceivedservice
     ports:
       - "12002:12002"
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - ApplicationInsights:InstrumentationKey=${CarTrackerAIKey}
+
+  alten.cartracker.simulation.simulator:
+    image: car_tracker/simulation
+    container_name: simulation
+    depends_on:
+      - rabbitmq
+      - sqlserver
+      - alten.cartracker.services.statusreceivedservice
+      - alten.cartracker.services.notificationservice
+      - alten.cartracker.backendapi.api
+    build:
+      context: .
+      dockerfile: Alten.CarTracker.Simulation.Simulator/Dockerfile
+    environment:
+      - CAR_TRACKER_ENVIRONMENT=Production
+
 
 volumes:
   sqlserverdata:

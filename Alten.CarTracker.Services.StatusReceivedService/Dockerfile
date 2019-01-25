@@ -1,6 +1,6 @@
 FROM microsoft/dotnet:2.2-aspnetcore-runtime AS base
 WORKDIR /app
-EXPOSE 12001
+EXPOSE 12001/tcp
 ENV ASPNETCORE_URLS http://*:12001
 HEALTHCHECK --interval=30s --timeout=3s --retries=1 CMD curl --silent --fail http://localhost:12001/hc || exit 1
 ENV WEBSITE_SITE_NAME StatusReceivedService

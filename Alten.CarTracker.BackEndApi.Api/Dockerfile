@@ -1,6 +1,6 @@
 FROM microsoft/dotnet:2.2-aspnetcore-runtime AS base
 WORKDIR /app
-EXPOSE 12000
+EXPOSE 12000/tcp
 ENV ASPNETCORE_URLS http://*:12000
 HEALTHCHECK --interval=30s --timeout=3s --retries=1 CMD curl --silent --fail http://localhost:12000/hc || exit 1
 ENV WEBSITE_SITE_NAME BackEndApi
