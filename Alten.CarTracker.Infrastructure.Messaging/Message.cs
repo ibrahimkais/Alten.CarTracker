@@ -14,7 +14,7 @@ namespace Alten.CarTracker.Infrastructure.Messaging
 		public Message(Guid messageId)
 		{
 			MessageId = messageId;
-			MessageType = this.GetType().Name;
+			MessageType = GetType().Name;
 		}
 
 		public Message(string messageType) : this(Guid.NewGuid())

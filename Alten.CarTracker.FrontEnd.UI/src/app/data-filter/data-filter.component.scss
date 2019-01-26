@@ -1,0 +1,21 @@
+.drawer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.mat-drawer-content {
+  overflow: hidden !important;
+  height: calc(100% - 128px) !important;
+}
+
+.mat-drawer-inner-container {
+  height: calc(100% - 128px) !important;
+}
+
+.select {
+  width: 95%;
+  padding: 5px;
+}

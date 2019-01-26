@@ -17,19 +17,12 @@ namespace Alten.CarTracker.Services.StatusReceivedService.Controllers
 	[ApiController]
 	public class StatusController : ControllerBase
 	{
-		//private readonly IMessagePublisher _messagePublisher;
 		private readonly EfDbContext _dbContext;
-		//private readonly IMapper _mapper;
-
 		private readonly IMapper _mapper;
 
-		//public StatusController(EfDbContext efDbContext, IMessagePublisher messagePublisher, IMapper mapper)
 		public StatusController(EfDbContext efDbContext, IMapper mapper)
 		{
 			_dbContext = efDbContext;
-			//_messagePublisher = messagePublisher;
-			//_mapper = mapper;
-
 			_mapper = mapper;
 		}
 
@@ -55,9 +48,7 @@ namespace Alten.CarTracker.Services.StatusReceivedService.Controllers
 			}
 			catch (DbUpdateException)
 			{
-				ModelState.AddModelError("", "Unable to save changes. " +
-					"Try again, and if the problem persists " +
-					"see your system administrator.");
+				ModelState.AddModelError("Database Error", "Unable to save changes.");
 				return StatusCode(StatusCodes.Status500InternalServerError);
 			}
 		}

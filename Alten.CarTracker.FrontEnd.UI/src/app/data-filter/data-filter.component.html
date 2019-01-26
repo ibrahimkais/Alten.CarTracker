@@ -1,0 +1,26 @@
+<mat-drawer-container class="drawer">
+  <mat-toolbar>Filteration</mat-toolbar>
+
+  <mat-drawer #sidenav mode="over" [(opened)]="opened" (opened)="events.push('open!')" (closed)="events.push('close!')">
+    <mat-form-field class="select">
+      <mat-select placeholder="Choose Customer">
+        <mat-option>--</mat-option>
+        <mat-option *ngFor="let customer of customers" [value]="customer">
+          {{customer.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="select">
+      <mat-select placeholder="Choose Status">
+        <mat-option>--</mat-option>
+        <mat-option *ngFor="let status of statuses" [value]="status">
+          {{status.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-drawer>
+  <mat-drawer-content [hasBackdrop]="false">
+    <app-map></app-map>
+  </mat-drawer-content>
+</mat-drawer-container>

@@ -1,0 +1,7 @@
+{
+  "serviceUrls": {
+    "getCustomers": "",
+    "getCars": "",
+    "getStatuses": ""
+  }
+}

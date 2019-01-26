@@ -21,7 +21,7 @@ namespace Alten.CarTracker.Simulation.Simulator
 			Config = new ConfigurationBuilder()
 				.SetBasePath(Directory.GetCurrentDirectory())
 				.AddJsonFile("appsettings.json")
-				.AddJsonFile($"appsettings.Development.json", optional: false)
+				.AddJsonFile($"appsettings.{_env}.json", optional: false)
 				.Build();
 		}
 
@@ -34,12 +34,12 @@ namespace Alten.CarTracker.Simulation.Simulator
 			string exchange = configSection["Exchange"];
 
 			RabbitMQMessageHandler handler = new RabbitMQMessageHandler(
-				host,
-				userName,
-				password,
-				exchange,
-				"CarStatus",
-				"CarStatus");
+																	host,
+																	userName,
+																	password,
+																	exchange,
+																	"CarStatus",
+																	"CarStatus");
 
 			configSection = Config.GetSection("StatusService");
 

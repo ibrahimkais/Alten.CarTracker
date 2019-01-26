@@ -1,0 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/purple-green.css';
+
+body,
+html {
+  margin: 0 auto;
+  padding: 0 auto;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: 'Montserrat';
+  font-size: 18px;
+}
