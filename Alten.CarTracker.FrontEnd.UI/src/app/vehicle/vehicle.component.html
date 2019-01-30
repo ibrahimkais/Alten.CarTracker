@@ -1,3 +1,22 @@
-<p>
-  vehicle works!
-</p>
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Vin Code
+    </mat-panel-title>
+    <mat-panel-description>
+      {{car.vin}}
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <p>Reg. No: {{car.registrationNumber}}</p>
+  <mat-divider></mat-divider>
+  <button mat-icon-button (click)="zoom()">
+    <mat-icon aria-label="Example icon-button with a heart icon">zoom_in</mat-icon>
+  </button>
+  <button mat-icon-button (click)="follow()">
+    <mat-icon aria-label="Example icon-button with a heart icon">visibility</mat-icon>
+  </button>
+  <button mat-icon-button (click)="showRoute()">
+    <mat-icon aria-label="Example icon-button with a heart icon">trending_up</mat-icon>
+  </button>
+
+</mat-expansion-panel>

@@ -32,6 +32,15 @@ namespace Alten.CarTracker.Services.NotificationService
 			Mapper.Initialize(cfg => cfg.AddProfile<MappingProfile>());
 			services.AddAutoMapper();
 
+			services.AddCors(options =>
+			{
+				options.AddPolicy("CorsPolicy",
+					builder => builder.AllowAnyOrigin()
+					.AllowAnyMethod()
+					.AllowAnyHeader()
+					.AllowCredentials());
+			});
+
 			services.AddSignalR();
 
 			var configSection = Configuration.GetSection("RabbitMQ");
@@ -48,17 +57,20 @@ namespace Alten.CarTracker.Services.NotificationService
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApplicationLifetime lifetime)
 		{
+			app.UseCors("CorsPolicy");
 			app.UseMvc();
 			app.UseDefaultFiles();
 			app.UseStaticFiles();
 
 			app.UseSignalR(route =>
 			{
-				route.MapHub<FrontNotificationHub>("/frontNotificationHub");
+				route.MapHub<StatusHub>("/status");
+				route.MapHub<DissconnectedHub>("/disconnected");
 			});
 
-			var hubContext = app.ApplicationServices.GetService<IHubContext<FrontNotificationHub>>();
-			StatusReceivedMessageHandler statusReceivedMessageHandler = new StatusReceivedMessageHandler(Mapper.Instance, hubContext);
+			var statusHubContext = app.ApplicationServices.GetService<IHubContext<StatusHub>>();
+			var dissconectedHubContext = app.ApplicationServices.GetService<IHubContext<DissconnectedHub>>();
+			StatusReceivedMessageHandler statusReceivedMessageHandler = new StatusReceivedMessageHandler(Mapper.Instance, statusHubContext, dissconectedHubContext);
 			var handler = app.ApplicationServices.GetService<RabbitMQMessageHandler>();
 			handler.Start(statusReceivedMessageHandler);
 		}

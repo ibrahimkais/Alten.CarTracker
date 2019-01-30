@@ -12,12 +12,14 @@ namespace Alten.CarTracker.Services.NotificationService.MessageHandler
 	public class StatusReceivedMessageHandler : IMessageHandlerCallback
 	{
 		private readonly IMapper _mapper;
-		private readonly IHubContext<FrontNotificationHub> _hubContext;
+		private readonly IHubContext<StatusHub> _statusHubContext;
+		private readonly IHubContext<DissconnectedHub> _disconnectedHubContext;
 
-		public StatusReceivedMessageHandler(IMapper mapper, IHubContext<FrontNotificationHub> hubContext)
+		public StatusReceivedMessageHandler(IMapper mapper, IHubContext<StatusHub> statusHubContext, IHubContext<DissconnectedHub> disconnectedContext)
 		{
 			_mapper = mapper;
-			_hubContext = hubContext;
+			_statusHubContext = statusHubContext;
+			_disconnectedHubContext = disconnectedContext;
 		}
 
 		public void Start()
@@ -48,14 +50,14 @@ namespace Alten.CarTracker.Services.NotificationService.MessageHandler
 		private async Task<bool> HandleAsync(StatusReceived message)
 		{
 			StatusReceivedDTO status = _mapper.Map<StatusReceived, StatusReceivedDTO>(message);
-			await _hubContext.Clients.All.SendAsync("SendMessageToGroup", status);
+			await _statusHubContext.Clients.All.SendAsync("sendstatus", status);
 			return true;
 		}
 
 		private async Task<bool> HandleAsync(VehicleDisconnected message)
 		{
 			VehicleDisconnectedDTO status = _mapper.Map<VehicleDisconnected, VehicleDisconnectedDTO>(message);
-			await _hubContext.Clients.All.SendAsync("SendMessageToGroup", status);
+			await _disconnectedHubContext.Clients.All.SendAsync("vehicledissconnected", status);
 			return true;
 		}
 	}

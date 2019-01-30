@@ -1,7 +1,6 @@
-<mat-drawer-container class="drawer">
-  <mat-toolbar>Filteration</mat-toolbar>
-
-  <mat-drawer #sidenav mode="over" [(opened)]="opened" (opened)="events.push('open!')" (closed)="events.push('close!')">
+<mat-drawer-container class="drawer" hasBackdrop="false">
+  <mat-drawer #sidenav mode="over" [(opened)]="opened">
+    <mat-toolbar>Filteration</mat-toolbar>
     <mat-form-field class="select">
       <mat-select placeholder="Choose Customer">
         <mat-option>--</mat-option>
@@ -10,7 +9,6 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-
     <mat-form-field class="select">
       <mat-select placeholder="Choose Status">
         <mat-option>--</mat-option>
@@ -19,8 +17,12 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
+    <mat-divider></mat-divider>
+    <mat-accordion>
+      <app-vehicle *ngFor="let car of cars" [car]="car"></app-vehicle>
+    </mat-accordion>
   </mat-drawer>
-  <mat-drawer-content [hasBackdrop]="false">
+  <mat-drawer-content>
     <app-map></app-map>
   </mat-drawer-content>
 </mat-drawer-container>

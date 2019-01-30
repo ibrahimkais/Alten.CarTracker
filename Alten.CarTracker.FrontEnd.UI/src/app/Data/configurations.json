@@ -1,7 +1,9 @@
 {
   "serviceUrls": {
-    "getCustomers": "",
-    "getCars": "",
-    "getStatuses": ""
+    "statusHubConnection": "http://localhost:12002/status",
+    "disconnectedHubConnection": "http://localhost:12002/disconnected",
+    "getCustomers": "http://localhost:12000/api/Data/GetCustomers",
+    "getCars": "http://localhost:12000/api/Data/GetVehicles",
+    "getStatuses": "http://localhost:12001/api/status/GetCarStatusLookup"
   }
 }

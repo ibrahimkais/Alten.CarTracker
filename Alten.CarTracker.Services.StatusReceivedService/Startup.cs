@@ -40,6 +40,15 @@ namespace Alten.CarTracker.Services.StatusReceivedService
 				)
 			);
 
+			services.AddCors(options =>
+			{
+				options.AddPolicy("CorsPolicy",
+					builder => builder.AllowAnyOrigin()
+					.AllowAnyMethod()
+					.AllowAnyHeader()
+					.AllowCredentials());
+			});
+
 			Mapper.Initialize(cfg => cfg.AddProfile<MappingProfile>());
 			services.AddAutoMapper();
 
@@ -63,6 +72,7 @@ namespace Alten.CarTracker.Services.StatusReceivedService
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApplicationLifetime lifetime, EfDbContext dbContext, IMapper mapper)
 		{
+			app.UseCors("CorsPolicy");
 			app.UseMvc();
 			app.UseDefaultFiles();
 			app.UseStaticFiles();

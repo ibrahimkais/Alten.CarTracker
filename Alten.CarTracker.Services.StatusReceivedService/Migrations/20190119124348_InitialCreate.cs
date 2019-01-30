@@ -68,7 +68,6 @@ namespace Alten.CarTracker.Services.StatusReceivedService.Migrations
                 {
                     { 1, "Stopped" },
                     { 2, "Moving" },
-                    { 3, "Connected" },
                     { 4, "Disconnected" }
                 });
 

@@ -4,11 +4,8 @@ using System.Threading.Tasks;
 
 namespace Alten.CarTracker.Services.NotificationService.SignalRHubs
 {
-	public class FrontNotificationHub : Hub
+	public class StatusHub : Hub
 	{
-		public Task SendMessageToGroup(StatusReceivedDTO message)
-		{
-			return Clients.Group("FrontUI").SendAsync("StatusMessage", message);
-		}
+		public Task SendStatus(StatusReceivedDTO message) => Clients.All.SendAsync("sendstatus", message);
 	}
 }

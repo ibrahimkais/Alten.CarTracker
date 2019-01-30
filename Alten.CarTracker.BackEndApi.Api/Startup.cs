@@ -34,6 +34,15 @@ namespace Alten.CarTracker.BackEndApi.Api
 			services.AddDbContext<EfDbContext>(options => options.UseSqlServer(sqlConnectionString))
 				.AddUnitOfWork<EfDbContext>();
 
+			services.AddCors(options =>
+			{
+				options.AddPolicy("CorsPolicy",
+					builder => builder.AllowAnyOrigin()
+					.AllowAnyMethod()
+					.AllowAnyHeader()
+					.AllowCredentials());
+			});
+
 			Mapper.Initialize(cfg => cfg.AddProfile<MappingProfile>());
 			services.AddAutoMapper();
 
@@ -54,6 +63,7 @@ namespace Alten.CarTracker.BackEndApi.Api
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApplicationLifetime lifetime)
 		{
+			app.UseCors("CorsPolicy");
 			app.UseMvc();
 			app.UseDefaultFiles();
 			app.UseStaticFiles();

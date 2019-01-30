@@ -31,8 +31,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6. Simulation", "6. Simulat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alten.CarTracker.Infrastructure.Common", "Alten.CarTracker.Infrastructure.Common\Alten.CarTracker.Infrastructure.Common.csproj", "{FC117A67-9978-4C65-992C-F18FAC453C91}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{4F4003B2-FFD9-44B5-AAE9-F7F54E478E6E}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alten.CarTracker.Services.TimeService", "Alten.CarTracker.Services.TimeService\Alten.CarTracker.Services.TimeService.csproj", "{4EC98820-F277-4A4C-A9DC-FDBF068109D4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alten.CarTracker.Simulation.Simulator", "Alten.CarTracker.Simulation.Simulator\Alten.CarTracker.Simulation.Simulator.csproj", "{7B1D72C0-D2A1-4C5E-B045-A88FB167C690}"
@@ -40,10 +38,13 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A75F4238-FE07-4E69-BF0B-0960DDB055DE}"
 	ProjectSection(SolutionItems) = preProject
 		alten-challenge[6289].txt = alten-challenge[6289].txt
-		..\Data\rabbit_22f68a1023e6_2019-1-26.json = ..\Data\rabbit_22f68a1023e6_2019-1-26.json
+		dockerfile = dockerfile
+		rabbit_22f68a1023e6_2019-1-26.json = rabbit_22f68a1023e6_2019-1-26.json
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alten.CarTracker.FrontEnd.UI", "Alten.CarTracker.FrontEnd.UI\Alten.CarTracker.FrontEnd.UI.csproj", "{308BBCF4-B318-4358-BA3C-2E5FF5509AC3}"
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "Alten.CarTracker.FrontEnd.UI", "Alten.CarTracker.FrontEnd.UI\Alten.CarTracker.FrontEnd.UI.njsproj", "{42DE9FC4-5068-4023-9004-DA3B75D76C80}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{F3AF08F8-8656-47EE-B7E8-0F6F730C0349}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,10 +84,6 @@ Global
 		{FC117A67-9978-4C65-992C-F18FAC453C91}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC117A67-9978-4C65-992C-F18FAC453C91}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC117A67-9978-4C65-992C-F18FAC453C91}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4F4003B2-FFD9-44B5-AAE9-F7F54E478E6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4F4003B2-FFD9-44B5-AAE9-F7F54E478E6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4F4003B2-FFD9-44B5-AAE9-F7F54E478E6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4F4003B2-FFD9-44B5-AAE9-F7F54E478E6E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4EC98820-F277-4A4C-A9DC-FDBF068109D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4EC98820-F277-4A4C-A9DC-FDBF068109D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4EC98820-F277-4A4C-A9DC-FDBF068109D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -95,10 +92,14 @@ Global
 		{7B1D72C0-D2A1-4C5E-B045-A88FB167C690}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B1D72C0-D2A1-4C5E-B045-A88FB167C690}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B1D72C0-D2A1-4C5E-B045-A88FB167C690}.Release|Any CPU.Build.0 = Release|Any CPU
-		{308BBCF4-B318-4358-BA3C-2E5FF5509AC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{308BBCF4-B318-4358-BA3C-2E5FF5509AC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{308BBCF4-B318-4358-BA3C-2E5FF5509AC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{308BBCF4-B318-4358-BA3C-2E5FF5509AC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42DE9FC4-5068-4023-9004-DA3B75D76C80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42DE9FC4-5068-4023-9004-DA3B75D76C80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42DE9FC4-5068-4023-9004-DA3B75D76C80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42DE9FC4-5068-4023-9004-DA3B75D76C80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3AF08F8-8656-47EE-B7E8-0F6F730C0349}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3AF08F8-8656-47EE-B7E8-0F6F730C0349}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3AF08F8-8656-47EE-B7E8-0F6F730C0349}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3AF08F8-8656-47EE-B7E8-0F6F730C0349}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -114,7 +115,7 @@ Global
 		{FC117A67-9978-4C65-992C-F18FAC453C91} = {5BD11311-87FD-4305-9122-9902D1605276}
 		{4EC98820-F277-4A4C-A9DC-FDBF068109D4} = {6AC8211E-9F42-44C1-83DD-E7A3ADD1CF1B}
 		{7B1D72C0-D2A1-4C5E-B045-A88FB167C690} = {537CE4D4-DF25-4F38-B02B-7BCCB73336E0}
-		{308BBCF4-B318-4358-BA3C-2E5FF5509AC3} = {E9DA7EDB-F151-4844-9F52-552EF553513E}
+		{42DE9FC4-5068-4023-9004-DA3B75D76C80} = {E9DA7EDB-F151-4844-9F52-552EF553513E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B193DB73-C91E-431D-9D3C-3950AD7E3734}

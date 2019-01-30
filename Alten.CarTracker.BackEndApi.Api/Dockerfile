@@ -3,7 +3,7 @@ WORKDIR /app
 EXPOSE 12000/tcp
 ENV ASPNETCORE_URLS http://*:12000
 HEALTHCHECK --interval=30s --timeout=3s --retries=1 CMD curl --silent --fail http://localhost:12000/hc || exit 1
-ENV WEBSITE_SITE_NAME BackEndApi
+ENV WEBSITE_SITE_NAME backendapi
 
 FROM microsoft/dotnet:2.2-sdk AS build
 WORKDIR /src
@@ -22,5 +22,6 @@ RUN dotnet publish Alten.CarTracker.BackEndApi.Api.csproj -c Release -o /app
 
 FROM base AS final
 WORKDIR /app
+
 COPY --from=publish /app .
 ENTRYPOINT ["dotnet", "Alten.CarTracker.BackEndApi.Api.dll"]

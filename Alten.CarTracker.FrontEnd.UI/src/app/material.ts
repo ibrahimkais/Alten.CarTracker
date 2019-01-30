@@ -6,6 +6,8 @@ import {
     MatTableModule,
     MatSelectModule,
     MatToolbarModule,
+    MatDividerModule,
+    MatFormFieldModule,
  } from '@angular/material';
  import {ReactiveFormsModule} from '@angular/forms';
 import { NgModule } from '@angular/core';
@@ -19,7 +21,9 @@ import { NgModule } from '@angular/core';
         MatTableModule,
         MatSelectModule,
         MatToolbarModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        MatDividerModule,
+        MatFormFieldModule,
     ],
     exports: [
         MatButtonModule,
@@ -29,7 +33,9 @@ import { NgModule } from '@angular/core';
         MatTableModule,
         MatSelectModule,
         MatToolbarModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        MatDividerModule,
+        MatFormFieldModule,
     ],
 })
 
