@@ -65,7 +65,7 @@ namespace Alten.CarTracker.Services.StatusReceivedService.DataAccess
 				},
 				new CarStatusLookup()
 				{
-					Id = 4,
+					Id = 3,
 					Name = "Disconnected"
 				}
 			);

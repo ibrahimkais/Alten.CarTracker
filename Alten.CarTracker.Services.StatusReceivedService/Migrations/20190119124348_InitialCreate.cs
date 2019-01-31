@@ -68,7 +68,7 @@ namespace Alten.CarTracker.Services.StatusReceivedService.Migrations
                 {
                     { 1, "Stopped" },
                     { 2, "Moving" },
-                    { 4, "Disconnected" }
+                    { 3, "Disconnected" }
                 });
 
             migrationBuilder.InsertData(

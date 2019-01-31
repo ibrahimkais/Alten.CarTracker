@@ -4,26 +4,25 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Linq;
 
 namespace Alten.CarTracker.Simulation.Simulator.MessageHandler
 {
 	public class CarMessageHandler : IMessageHandlerCallback
 	{
 		private readonly IMessageHandler _messageHandler;
-		private readonly List<TimeManager> _timeManagers;
+		private readonly List<CarManager> _carManagers;
 
 		public CarMessageHandler(IMessageHandler messageHandler)
 		{
 			_messageHandler = messageHandler;
-			_timeManagers = new List<TimeManager>();
+			_carManagers = new List<CarManager>();
 		}
 
 		public void Start() => _messageHandler.Start(this);
 
 		public void Stop() => _messageHandler.Stop();
 
-		public void Register(TimeManager timeManager) => _timeManagers.Add(timeManager);
+		public void Register(CarManager timeManager) => _carManagers.Add(timeManager);
 
 		public Task<bool> HandleMessageAsync(string messageType, string message)
 		{
@@ -51,30 +50,26 @@ namespace Alten.CarTracker.Simulation.Simulator.MessageHandler
 					case "DisconnectAll":
 						Handle(messageObject.ToObject<DisconnectAll>());
 						break;
+					case "Reset":
+						Handle(messageObject.ToObject<Reset>());
+						break;
 				}
 				return true;
 			});
 		}
 
-		private void Handle(DisconnectAll disconnectAll)
-		{
-			_timeManagers.ForEach(manager => manager.Disconnect(manager.Car.VinCode));
-		}
+		private void Handle(Reset reset) => _carManagers.ForEach(manager => manager.Reset());
 
-		private void Handle(StopAll stopAll)
-		{
-			_timeManagers.ForEach(manager => manager.Stop(manager.Car.VinCode));
-		}
+		private void Handle(DisconnectAll disconnectAll) => _carManagers.ForEach(manager => manager.Disconnect(manager.Car.VinCode));
 
-		private void Handle(StartAll startAll)
-		{
-			_timeManagers.ForEach(async manager => await manager.Start(manager.Car.VinCode));
-		}
+		private void Handle(StopAll stopAll) => _carManagers.ForEach(manager => manager.Stop(manager.Car.VinCode));
 
-		private void Handle(DisconnectCar disconnectCar) => _timeManagers.ForEach(manager => manager.Disconnect(disconnectCar.VinCode));
+		private void Handle(StartAll startAll) => _carManagers.ForEach(async manager => await manager.Start(manager.Car.VinCode));
 
-		private void Handle(StopCar stopCar) => _timeManagers.ForEach(manager => manager.Stop(stopCar.VinCode));
+		private void Handle(DisconnectCar disconnectCar) => _carManagers.ForEach(manager => manager.Disconnect(disconnectCar.VinCode));
 
-		private void Handle(StartCar startCar) => _timeManagers.ForEach(async manager => await manager.Start(startCar.VinCode));
+		private void Handle(StopCar stopCar) => _carManagers.ForEach(manager => manager.Stop(stopCar.VinCode));
+
+		private void Handle(StartCar startCar) => _carManagers.ForEach(async manager => await manager.Start(startCar.VinCode));
 	}
 }

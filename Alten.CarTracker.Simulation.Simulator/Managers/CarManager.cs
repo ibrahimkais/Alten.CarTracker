@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Alten.CarTracker.Simulation.Simulator
 {
-	public class TimeManager
+	public class CarManager
 	{
 		private DateTime _lastCheck;
 		private List<Rtept> points = new List<Rtept>();
@@ -21,7 +21,7 @@ namespace Alten.CarTracker.Simulation.Simulator
 		private HttpClient _client;
 		private readonly string _controller, _action;
 
-		public TimeManager(Car car, HttpClient client, string contoller, string action)
+		public CarManager(Car car, HttpClient client, string contoller, string action)
 		{
 			_controller = contoller;
 			_action = action;
@@ -98,6 +98,12 @@ namespace Alten.CarTracker.Simulation.Simulator
 				}
 				Thread.Sleep(59999);
 			}
+		}
+
+		public void Reset()
+		{
+			pointsIndex = 0;
+			Disconnect(Car.VinCode);
 		}
 	}
 }

@@ -62,7 +62,7 @@ namespace Alten.CarTracker.Simulation.Simulator
 
 			Parallel.ForEach(DataLoader.Instance.Cars, (car) =>
 			{
-				TimeManager timeManager = new TimeManager(car, client, controller, action);
+				CarManager timeManager = new CarManager(car, client, controller, action);
 				carMessageHandler.Register(timeManager);
 			});
 

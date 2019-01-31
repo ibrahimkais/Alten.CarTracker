@@ -2,67 +2,119 @@ import { Component, OnInit } from '@angular/core';
 import { loadCss, loadModules } from 'esri-loader';
 import { DataService } from '../services/data.service';
 import { Car } from '../models/Car';
+import { ICarStatusChanged } from '../Interfaces/ICarStatusChanged';
+import { CarStatus } from '../models/carStatus';
+import { CarDisconnected } from '../models/carDisconnected';
+import { SignalRService } from '../services/signal-rservice.service';
+import { Statuses } from '../Interfaces/enums';
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss']
 })
-export class MapComponent implements OnInit {
+export class MapComponent implements OnInit, ICarStatusChanged {
 
   webScene: any;
   webView: any;
   carsGraphiclayer: any;
   routesGraphiclayer: any;
   statusGraphicLayer: any;
-  esriModules: any[] = [];
+  esriModules: any = {};
 
   carSymbol = {
     type: 'point-3d',
     symbolLayers: [{
       type: 'icon',
       resource: {
-        href: 'assets/images/logo.png'
+        href: 'assets/images/car.png'
       },
-      size: 20,
+      size: 80,
       outline: {
         color: 'white',
-        size: 2
+        size: 4
       }
     }],
     verticalOffset: {
       screenLength: 40,
-      maxWorldLength: 200,
-      minWorldLength: 35
+      maxWorldLength: 300,
+      minWorldLength: 50
     },
     callout: {
       type: 'line',
       color: 'white',
-      size: 2,
+      size: 4,
       border: {
         color: '#D13470'
       }
     }
   };
 
-  constructor(private dataService: DataService) { }
+  ESRI = [
+    {
+      'module': 'esri/WebScene',
+      'key': 'WebScene'
+    },
+    {
+      'module': 'esri/views/SceneView',
+      'key': 'SceneView'
+    },
+    {
+      'module': 'esri/layers/SceneLayer',
+      'key': 'SceneLayer'
+    },
+    {
+      'module': 'esri/layers/GraphicsLayer',
+      'key': 'GraphicsLayer'
+    },
+    {
+      'module': 'esri/Graphic',
+      'key': 'Graphic'
+    },
+    {
+      'module': 'esri/symbols/SimpleMarkerSymbol',
+      'key': 'SimpleMarkerSymbol'
+    },
+    {
+      'module': 'esri/Color',
+      'key': 'Color'
+    },
+    {
+      'module': 'esri/widgets/Home',
+      'key': 'Home'
+    },
+    {
+      'module': 'esri/widgets/Expand',
+      'key': 'Expand'
+    },
+    {
+      'module': 'esri/widgets/LayerList',
+      'key': 'LayerList'
+    },
+    {
+      'module': 'dojo/fx',
+      'key': 'coreFx'
+    },
+    {
+      'module': 'dojo/_base/fx',
+      'key': 'fx'
+    },
+    {
+      'module': 'dojo/fx/easing',
+      'key': 'easing'
+    },
+  ];
+
+  constructor(private dataService: DataService, private signalRService: SignalRService) { }
 
   ngOnInit() {
+    this.signalRService.subscribe(this);
+
     loadCss('https://js.arcgis.com/4.10/esri/css/main.css');
-    loadModules([
-      'esri/WebScene',
-      'esri/views/SceneView',
-      'esri/layers/SceneLayer',
-      'esri/layers/GraphicsLayer',
-      'esri/Graphic',
-      'esri/symbols/SimpleMarkerSymbol',
-      'esri/Color',
-      'esri/widgets/Home',
-      'esri/widgets/Expand',
-      'esri/widgets/LayerList',
-    ]).then(modules => {
-      this.esriModules = modules;
-      const [WebScene, SceneView, SceneLayer, GraphicsLayer, , , , Home, Expand, LayerList] = modules;
+    loadModules(this.ESRI.map(m => m.module)).then(modules => {
+      modules.forEach((module, index) => this.esriModules[this.ESRI[index].key] = module);
+
+      const { WebScene, SceneView, SceneLayer, GraphicsLayer, Home, Expand, LayerList } = this.esriModules;
 
       const sceneLayer = new SceneLayer({
         portalItem: {
@@ -147,6 +199,37 @@ export class MapComponent implements OnInit {
     );
   }
 
+  public carStatusChanged(carStatus: CarStatus) {
+    this.updateCarLocation(carStatus.vinCode, carStatus.x, carStatus.y);
+  }
+
+  public carDisconnectedChanged(carDisconnected: CarDisconnected) {
+    const car = this.carsGraphiclayer.graphics.find(g => {
+      return g.attributes.carId === carDisconnected.vinCode;
+    });
+
+    if (car) { this.animateGraphic(car); }
+  }
+
+  animateGraphic = (graphicFlash) => {
+    const shape = graphicFlash.getDojoShape().getNode();
+    const { coreFx, fx, easing } = this.esriModules;
+
+    const animA = fx.fadeOut({
+      node: shape,
+      duration: 700,
+      easing: easing.linear
+    });
+
+    const animB = fx.fadeIn({
+      node: shape,
+      easing: easing.linear,
+      duration: 700
+    });
+
+    coreFx.chain([animB, animA, animB, animA, animB, animA]).play();
+  }
+
   zoomToDefault = () =>
     this.webView.goTo(
       {
@@ -182,13 +265,13 @@ export class MapComponent implements OnInit {
     );
   }
 
-  updateCarLocation = (carId: string, x: number, y: number) => {
+  updateCarLocation = (vinCode: string, x: number, y: number) => {
     const car = this.carsGraphiclayer.graphics.find(g => {
-      return g.attributes.carId === carId;
+      return g.attributes.vinCode === vinCode;
     });
     this.carsGraphiclayer.remove(car);
 
-    const [Graphic] = this.esriModules;
+    const { Graphic } = this.esriModules;
     const newCar = new Graphic({
       geometry: {
         type: 'point',
@@ -197,7 +280,7 @@ export class MapComponent implements OnInit {
       },
       symbol: this.carSymbol,
       attributes: {
-        pkCarId: carId
+        vinCode: vinCode
       }
     });
     this.carsGraphiclayer.add(newCar);
@@ -214,6 +297,7 @@ export class MapComponent implements OnInit {
       index = i;
       return p._lat === carGraphic.geometry.y && p._lon === carGraphic.geometry.y;
     });
+
     if (point) {
       const pointsRange = data.gpx.trk.trkpt.slice(0, index).map(p => [p._lon, p._lat]);
       const polyline = {
@@ -222,7 +306,7 @@ export class MapComponent implements OnInit {
       };
 
       this.clearRoutes();
-      const [Graphic, SimpleMarkerSymbol, Color] = this.esriModules;
+      const { Graphic, SimpleMarkerSymbol, Color } = this.esriModules;
 
       const polylineSymbol = {
         type: 'simple-line',

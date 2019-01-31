@@ -19,7 +19,7 @@
     </mat-form-field>
     <mat-divider></mat-divider>
     <mat-accordion>
-      <app-vehicle *ngFor="let car of cars | carsFilter: selectedStatus, selectedCustomer"  [car]="car"></app-vehicle>
+      <app-vehicle *ngFor="let car of cars | carsFilter: selectedStatus: selectedCustomer"  [car]="car"></app-vehicle>
     </mat-accordion>
   </mat-drawer>
   <mat-drawer-content>
