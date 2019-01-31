@@ -3,5 +3,5 @@ export class CarStatus {
     x: number;
     y: number;
     receivedDate: Date;
-    pkCarId: string;
+    vinCode: string;
 }

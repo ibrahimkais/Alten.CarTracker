@@ -1,9 +1,9 @@
 import { CarStatus } from './carStatus';
 
 export class Car {
-    vin: string;
-    registrationNumber: string;
-    customerId: number;
-    carStatuses: Array<CarStatus>;
-    status: string;
+    public vin: string;
+    public registrationNumber: string;
+    public customerId: number;
+    public carStatuses: Array<CarStatus> = new Array<CarStatus>();
+    public lastStatusId: Number;
 }

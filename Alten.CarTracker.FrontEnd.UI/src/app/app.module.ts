@@ -14,6 +14,7 @@ import { RouteGridComponent } from './route-grid/route-grid.component';
 import { VehicleComponent } from './vehicle/vehicle.component';
 import { DataFilterComponent } from './data-filter/data-filter.component';
 import { SidenavService } from './services/SideNavService';
+import { CarsFilterPipe } from './data-filter/CarsFilterPipe';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { SidenavService } from './services/SideNavService';
     RouteGridComponent,
     VehicleComponent,
     DataFilterComponent,
+    CarsFilterPipe
   ],
   imports: [
     BrowserModule,

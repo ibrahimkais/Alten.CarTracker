@@ -44,7 +44,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "Alten.CarTracker.FrontEnd.UI", "Alten.CarTracker.FrontEnd.UI\Alten.CarTracker.FrontEnd.UI.njsproj", "{42DE9FC4-5068-4023-9004-DA3B75D76C80}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{F3AF08F8-8656-47EE-B7E8-0F6F730C0349}"
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{928E37EA-DE2F-46F4-A006-654B95704095}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -96,10 +96,10 @@ Global
 		{42DE9FC4-5068-4023-9004-DA3B75D76C80}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{42DE9FC4-5068-4023-9004-DA3B75D76C80}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{42DE9FC4-5068-4023-9004-DA3B75D76C80}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F3AF08F8-8656-47EE-B7E8-0F6F730C0349}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F3AF08F8-8656-47EE-B7E8-0F6F730C0349}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F3AF08F8-8656-47EE-B7E8-0F6F730C0349}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F3AF08F8-8656-47EE-B7E8-0F6F730C0349}.Release|Any CPU.Build.0 = Release|Any CPU
+		{928E37EA-DE2F-46F4-A006-654B95704095}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{928E37EA-DE2F-46F4-A006-654B95704095}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{928E37EA-DE2F-46F4-A006-654B95704095}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{928E37EA-DE2F-46F4-A006-654B95704095}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

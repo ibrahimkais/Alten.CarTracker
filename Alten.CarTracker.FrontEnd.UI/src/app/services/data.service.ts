@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import VLUR4X20009048044 from '../Data/VLUR4X20009048044_long.json';
-import VLUR4X20009048066 from '../Data/VLUR4X20009048066_long.json';
-import VLUR4X20009093588 from '../Data/VLUR4X20009093588_long.json';
-import YS2R4X20005387055 from '../Data/YS2R4X20005387055_long.json';
-import YS2R4X20005387949 from '../Data/YS2R4X20005387949_long.json';
-import YS2R4X20005388011 from '../Data/YS2R4X20005388011_long.json';
-import YS2R4X20005399401 from '../Data/YS2R4X20005399401_long.json';
+import VLUR4X20009048044 from '../Data/VLUR4X20009048044_Long.json';
+import VLUR4X20009048066 from '../Data/VLUR4X20009048066_Long.json';
+import VLUR4X20009093588 from '../Data/VLUR4X20009093588_Long.json';
+import YS2R4X20005387055 from '../Data/YS2R4X20005387055_Long.json';
+import YS2R4X20005387949 from '../Data/YS2R4X20005387949_Long.json';
+import YS2R4X20005388011 from '../Data/YS2R4X20005388011_Long.json';
+import YS2R4X20005399401 from '../Data/YS2R4X20005399401_Long.json';
 
 @Injectable({
   providedIn: 'root'

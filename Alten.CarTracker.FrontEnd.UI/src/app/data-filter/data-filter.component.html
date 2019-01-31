@@ -2,7 +2,7 @@
   <mat-drawer #sidenav mode="over" [(opened)]="opened">
     <mat-toolbar>Filteration</mat-toolbar>
     <mat-form-field class="select">
-      <mat-select placeholder="Choose Customer">
+      <mat-select placeholder="Choose Customer" [(ngModel)]="selectedCustomer">
         <mat-option>--</mat-option>
         <mat-option *ngFor="let customer of customers" [value]="customer">
           {{customer.name}}
@@ -10,7 +10,7 @@
       </mat-select>
     </mat-form-field>
     <mat-form-field class="select">
-      <mat-select placeholder="Choose Status">
+      <mat-select placeholder="Choose Status" [(ngModel)]="selectedStatus">
         <mat-option>--</mat-option>
         <mat-option *ngFor="let status of statuses" [value]="status">
           {{status.name}}
@@ -19,7 +19,7 @@
     </mat-form-field>
     <mat-divider></mat-divider>
     <mat-accordion>
-      <app-vehicle *ngFor="let car of cars" [car]="car"></app-vehicle>
+      <app-vehicle *ngFor="let car of cars | carsFilter: selectedStatus, selectedCustomer"  [car]="car"></app-vehicle>
     </mat-accordion>
   </mat-drawer>
   <mat-drawer-content>

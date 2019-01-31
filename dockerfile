@@ -2,8 +2,8 @@
 FROM node:latest as node
 WORKDIR /app
 COPY Alten.CarTracker.FrontEnd.UI/ .
-RUN yarn install --network-timeout 300000
-RUN yarn add node-sass
+RUN yarn install --network-timeout 300000 --no-lockfile
+RUN npm install --save rebuild-node-sass node-sass
 RUN yarn run build --prod
 
 # stage 2

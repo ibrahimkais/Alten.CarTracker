@@ -32,14 +32,12 @@ namespace Alten.CarTracker.Services.NotificationService
 			Mapper.Initialize(cfg => cfg.AddProfile<MappingProfile>());
 			services.AddAutoMapper();
 
-			services.AddCors(options =>
-			{
-				options.AddPolicy("CorsPolicy",
-					builder => builder.AllowAnyOrigin()
+			services.AddCors(options => options.AddPolicy("CorsPolicy",
+					builder => builder.WithOrigins("http://localhost:4200", "http://localhost:12004")
 					.AllowAnyMethod()
 					.AllowAnyHeader()
-					.AllowCredentials());
-			});
+					.AllowCredentials())
+			);
 
 			services.AddSignalR();
 
@@ -58,15 +56,15 @@ namespace Alten.CarTracker.Services.NotificationService
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApplicationLifetime lifetime)
 		{
 			app.UseCors("CorsPolicy");
-			app.UseMvc();
-			app.UseDefaultFiles();
-			app.UseStaticFiles();
-
 			app.UseSignalR(route =>
 			{
 				route.MapHub<StatusHub>("/status");
 				route.MapHub<DissconnectedHub>("/disconnected");
 			});
+			app.UseMvc();
+			app.UseDefaultFiles();
+			app.UseStaticFiles();
+
 
 			var statusHubContext = app.ApplicationServices.GetService<IHubContext<StatusHub>>();
 			var dissconectedHubContext = app.ApplicationServices.GetService<IHubContext<DissconnectedHub>>();

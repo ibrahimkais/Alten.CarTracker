@@ -8,8 +8,9 @@ import {
     MatToolbarModule,
     MatDividerModule,
     MatFormFieldModule,
- } from '@angular/material';
- import {ReactiveFormsModule} from '@angular/forms';
+    MatTooltipModule,
+} from '@angular/material';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
 @NgModule({
@@ -24,6 +25,8 @@ import { NgModule } from '@angular/core';
         ReactiveFormsModule,
         MatDividerModule,
         MatFormFieldModule,
+        MatTooltipModule,
+        FormsModule,
     ],
     exports: [
         MatButtonModule,
@@ -36,6 +39,8 @@ import { NgModule } from '@angular/core';
         ReactiveFormsModule,
         MatDividerModule,
         MatFormFieldModule,
+        MatTooltipModule,
+        FormsModule,
     ],
 })
 

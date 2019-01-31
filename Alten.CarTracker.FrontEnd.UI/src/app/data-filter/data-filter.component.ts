@@ -9,26 +9,22 @@ import { Car } from '../models/Car';
 @Component({
   selector: 'app-data-filter',
   templateUrl: './data-filter.component.html',
-  styleUrls: ['./data-filter.component.scss']
+  styleUrls: ['./data-filter.component.scss'],
 })
-export class DataFilterComponent implements OnInit {
 
+export class DataFilterComponent implements OnInit {
   @ViewChild('sidenav') public sidenav: MatSidenav;
   opened = true;
 
   statuses: StatusLookup[] = [];
   customers: Customer[] = [];
   cars: Car[] = [];
-  customer: Customer;
-  status: StatusLookup;
-  selectedCar: Car;
+  selectedCustomer: Customer;
+  selectedStatus: StatusLookup;
 
-  constructor(private sidenavService: SidenavService, private backEndService: BackEndService) {
-
-  }
+  constructor(private sidenavService: SidenavService, private backEndService: BackEndService) { }
 
   ngOnInit() {
-
     this.sidenavService.setSidenav(this.sidenav);
 
     this.backEndService.getCustomers().subscribe(data => {
