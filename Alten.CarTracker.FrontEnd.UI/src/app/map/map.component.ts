@@ -6,8 +6,8 @@ import { ICarStatusChanged } from '../Interfaces/ICarStatusChanged';
 import { CarStatus } from '../models/carStatus';
 import { CarDisconnected } from '../models/carDisconnected';
 import { SignalRService } from '../services/signal-rservice.service';
-import { Statuses } from '../Interfaces/enums';
 import { SidenavService } from '../services/SideNavService';
+import { MapControlService } from '../services/map-control.service';
 
 @Component({
   selector: 'app-map',
@@ -92,26 +92,18 @@ export class MapComponent implements OnInit, ICarStatusChanged {
       'module': 'esri/widgets/LayerList',
       'key': 'LayerList'
     },
-    {
-      'module': 'dojo/fx',
-      'key': 'coreFx'
-    },
-    {
-      'module': 'dojo/_base/fx',
-      'key': 'fx'
-    },
-    {
-      'module': 'dojo/fx/easing',
-      'key': 'easing'
-    },
   ];
 
   constructor(private dataService: DataService,
     private signalRService: SignalRService,
-    private sidenav: SidenavService) { }
+    private sidenav: SidenavService,
+    private mapControlService: MapControlService) { }
 
   ngOnInit() {
     this.signalRService.subscribe(this);
+    this.mapControlService.setDrawRoute(this.drawRoute);
+    this.mapControlService.setLocatePoint(this.locate);
+    this.mapControlService.setClear(this.clearRoutes);
 
     loadCss('https://js.arcgis.com/4.10/esri/css/main.css');
     loadModules(this.ESRI.map(m => m.module)).then(modules => {
@@ -151,7 +143,10 @@ export class MapComponent implements OnInit, ICarStatusChanged {
       });
 
       this.statusGraphicLayer = new GraphicsLayer({
-        title: 'Status Points'
+        title: 'Status Points',
+        popupTemplate: {
+          content: '<p>X: {x}</p><p>Y: {y}</p>',
+        }
       });
 
       this.carsGraphiclayer = new GraphicsLayer({
@@ -199,10 +194,12 @@ export class MapComponent implements OnInit, ICarStatusChanged {
       });
 
       this.webScene.watch('loaded', (newValue: boolean, oldValue: boolean, propertyName: string, target: any) => {
-        if (newValue === true) { setTimeout(() => {
-          this.zoomToDefault();
-          this.sidenav.open();
-        }, 7000); }
+        if (newValue === true) {
+          setTimeout(() => {
+            this.zoomToDefault();
+            this.sidenav.open();
+          }, 7000);
+        }
       });
     }
     );
@@ -212,48 +209,20 @@ export class MapComponent implements OnInit, ICarStatusChanged {
     this.updateCarLocation(carStatus.vinCode, carStatus.x, carStatus.y);
   }
 
-  public carDisconnectedChanged(carDisconnected: CarDisconnected) {
-    const car = this.carsGraphiclayer.graphics.find(g => {
-      return g.attributes.carId === carDisconnected.vinCode;
-    });
+  public carDisconnectedChanged(carDisconnected: CarDisconnected) { }
 
-    if (car) { this.animateGraphic(car); }
-  }
-
-  animateGraphic = (graphicFlash) => {
-    const shape = graphicFlash.getDojoShape().getNode();
-    const { coreFx, fx, easing } = this.esriModules;
-
-    const animA = fx.fadeOut({
-      node: shape,
-      duration: 700,
-      easing: easing.linear
-    });
-
-    const animB = fx.fadeIn({
-      node: shape,
-      easing: easing.linear,
-      duration: 700
-    });
-
-    coreFx.chain([animB, animA, animB, animA, animB, animA]).play();
-  }
-
-  zoomToDefault = () =>
-    this.webView.goTo(
-      {
-        'position': {
-          'spatialReference': {
-            'wkid': 102100
-          },
-          'x': -13618785.025166072,
-          'y': 4537012.796847662,
-          'z': 8437.146268719807
-        },
-        'heading': 309.68298522946975,
-        'tilt': 52.024161885490834
-      }
-    )
+  zoomToDefault = () => this.webView.goTo({
+    'position': {
+      'spatialReference': {
+        'wkid': 102100
+      },
+      'x': -13618785.025166072,
+      'y': 4537012.796847662,
+      'z': 8437.146268719807
+    },
+    'heading': 309.68298522946975,
+    'tilt': 52.024161885490834
+  })
 
   zoomToCar = (vinCode: string) => {
     const car = this.carsGraphiclayer.graphics.find(g => {
@@ -274,91 +243,109 @@ export class MapComponent implements OnInit, ICarStatusChanged {
   }
 
   updateCarLocation = (vinCode: string, x: number, y: number) => {
-    const car = this.carsGraphiclayer.graphics.find(g => {
-      return g.attributes.vinCode === vinCode;
-    });
-    this.carsGraphiclayer.remove(car);
-
-    const { Graphic } = this.esriModules;
-    const newCar = new Graphic({
-      geometry: {
-        type: 'point',
-        x: x,
-        y: y
-      },
-      symbol: this.carSymbol,
-      attributes: {
-        vinCode: vinCode
-      }
-    });
-    this.carsGraphiclayer.add(newCar);
-  }
-
-  drawRoute = (car: Car) => {
-    const data = this.dataService.getData(car.vin);
-    const carGraphic = this.carsGraphiclayer.graphics.find(g => {
-      return g.attributes.carId === car.vin;
-    });
-
-    let index: number;
-    const point = data.gpx.trk.trkpt.find((p, i) => {
-      index = i;
-      return p._lat === carGraphic.geometry.y && p._lon === carGraphic.geometry.y;
-    });
-
-    if (point) {
-      const pointsRange = data.gpx.trk.trkpt.slice(0, index).map(p => [p._lon, p._lat]);
-      const polyline = {
-        type: 'polyline',
-        paths: [pointsRange]
-      };
-
-      this.clearRoutes();
-      const { Graphic, SimpleMarkerSymbol, Color } = this.esriModules;
-
-      const polylineSymbol = {
-        type: 'simple-line',
-        color: [226, 119, 40],
-        width: 4
-      };
-
-      const polylineAtt = {
-        carId: car.vin,
-      };
-
-      const polylineGraphic = new Graphic({
-        geometry: polyline,
-        symbol: polylineSymbol,
-        attributes: polylineAtt
+    if (this.carsGraphiclayer && this.carsGraphiclayer.graphics) {
+      const car = this.carsGraphiclayer.graphics.find(g => {
+        return g.attributes.vinCode === vinCode;
       });
+      this.carsGraphiclayer.remove(car);
 
-      this.routesGraphiclayer.add(polylineGraphic);
-
-      const marker = new SimpleMarkerSymbol();
-      marker.setSize(24);
-      marker.setPath(`M16,3.5c-4.142,0-7.5,3.358-7.5,7.5c0,4.143,7.5,18.121,7.5,
-      18.121S23.5,15.143,23.5,11C23.5,6.858,20.143,3.5,16,3.5z M16,14.584c-1.979,
-      0-3.584-1.604-3.584-3.584S14.021,7.416,16,7.416S19.584,9.021,19.584,11S17.979,14.584,16,14.584z`);
-      marker.setStyle(SimpleMarkerSymbol.STYLE_PATH);
-      marker.setColor(new Color([56, 168, 0, 1]));
-
-      car.carStatuses.forEach(status => {
-        const geom = {
+      const { Graphic } = this.esriModules;
+      const newCar = new Graphic({
+        geometry: {
           type: 'point',
-          x: status.x,
-          y: status.y
-        };
-        const pointG = new Graphic({
-          geometry: geom,
-          symbol: marker
-        });
-        this.statusGraphicLayer.add(pointG);
+          x: x,
+          y: y
+        },
+        symbol: this.carSymbol,
+        attributes: {
+          vinCode: vinCode
+        }
       });
+      this.carsGraphiclayer.add(newCar);
     }
   }
 
+  drawRoute = (car: Car) => {
+    this.clearRoutes();
+    const routData = this.dataService.getData(car.vin);
+    const carGraphic = this.carsGraphiclayer.graphics.find(g => {
+      return g.attributes.vinCode === car.vin;
+    });
+
+    if (carGraphic) {
+      let index: number;
+      const point = routData.data.gpx.trk.trkseg.trkpt.find((p, i) => {
+        index = i;
+        return Number(p._lat) === carGraphic.geometry.y && Number(p._lon) === carGraphic.geometry.x;
+      });
+
+      if (point) {
+        const pointsRange = routData.data.gpx.trk.trkseg.trkpt.slice(0, index).map(p => [p._lon, p._lat]);
+        const polyline = {
+          type: 'polyline',
+          paths: [pointsRange]
+        };
+
+        const { Graphic } = this.esriModules;
+
+        const polylineSymbol = {
+          type: 'simple-line',
+          color: [226, 119, 40],
+          width: 4
+        };
+
+        const polylineAtt = {
+          vinCode: car.vin,
+        };
+
+        const polylineGraphic = new Graphic({
+          geometry: polyline,
+          symbol: polylineSymbol,
+          attributes: polylineAtt
+        });
+
+        this.routesGraphiclayer.add(polylineGraphic);
+
+        car.carStatuses.forEach(status => {
+          this.locate(status);
+        });
+      }
+    }
+  }
+
+  locate = (status: CarStatus) => {
+    const { Graphic, SimpleMarkerSymbol, Color } = this.esriModules;
+
+    const marker = new SimpleMarkerSymbol();
+    marker.size = 24;
+    marker.path = `M16,3.5c-4.142,0-7.5,3.358-7.5,7.5c0,4.143,7.5,18.121,7.5,
+    18.121S23.5,15.143,23.5,11C23.5,6.858,20.143,3.5,16,3.5z M16,14.584c-1.979,
+    0-3.584-1.604-3.584-3.584S14.021,7.416,16,7.416S19.584,9.021,19.584,11S17.979,14.584,16,14.584z`;
+    marker.style = 'path';
+    marker.color = new Color([56, 168, 0, 1]);
+
+    const geom = {
+      type: 'point',
+      x: status.x,
+      y: status.y
+    };
+
+    const pointAtt = {
+      x: status.x,
+      y: status.y
+    };
+
+    const pointG = new Graphic({
+      geometry: geom,
+      symbol: marker,
+      attributes: pointAtt
+    });
+
+    this.statusGraphicLayer.add(pointG);
+  }
+
   clearRoutes = () => {
-    this.routesGraphiclayer.clear();
-    this.statusGraphicLayer.clear();
+    this.routesGraphiclayer.removeAll();
+    this.statusGraphicLayer.removeAll();
   }
 }

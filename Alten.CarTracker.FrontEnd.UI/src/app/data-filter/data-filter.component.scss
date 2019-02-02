@@ -8,14 +8,18 @@
 
 .mat-drawer-content {
   overflow: hidden !important;
-  height: calc(100% - 128px) !important;
+  height: calc(100% - 104px) !important;
 }
 
 .mat-drawer-inner-container {
-  height: calc(100% - 128px) !important;
+  height: calc(100% - 104px) !important;
 }
 
 .select {
   width: 95%;
   padding: 5px;
+}
+
+.toolbar {
+  height: 40px;
 }

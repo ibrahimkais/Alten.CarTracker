@@ -1,7 +1,7 @@
 .slider {
     position: absolute;
     width: 35%;
-    height: 44vh;
+    height: 45vh;
     top: 50%;
     overflow: hidden;
     transition: all 1s;
@@ -34,4 +34,8 @@
 
   .mat-row:hover {
     background: rgba(255,255,255,.04)
+  }
+
+  .toolbar {
+    height: 40px;
   }

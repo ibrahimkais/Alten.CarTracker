@@ -2,4 +2,13 @@ footer {
   position: absolute;
   bottom: 0;
   width: 100%;
+
+  mat-toolbar {
+    min-height: 40px;
+
+    mat-toolbar-row {
+      justify-content: center;
+      height: 40px;
+    }
+  }
 }
