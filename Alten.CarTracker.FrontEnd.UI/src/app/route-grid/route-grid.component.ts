@@ -22,6 +22,7 @@ export class RouteGridComponent implements OnInit, ICarStatusChanged {
   ngOnInit() { this.signalRService.subscribe(this); }
 
   show = (car: Car) => {
+    this.mapControlService.clear();
     this.car = car;
     this.dataSource = [...this.car.carStatuses];
     this.isHidden = false;
