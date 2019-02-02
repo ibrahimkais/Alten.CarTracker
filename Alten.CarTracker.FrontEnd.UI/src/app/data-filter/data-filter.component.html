@@ -19,10 +19,11 @@
     </mat-form-field>
     <mat-divider></mat-divider>
     <mat-accordion>
-      <app-vehicle *ngFor="let car of cars | carsFilter: selectedStatus: selectedCustomer"  [car]="car"></app-vehicle>
+      <app-vehicle *ngFor="let car of cars | carsFilter: selectedStatus: selectedCustomer"  [car]="car" (zoomEvent)="mapCopm.zoomToCar(car.vin)" (routesEvent)="routGridComp.show(car)"></app-vehicle>
     </mat-accordion>
   </mat-drawer>
   <mat-drawer-content>
-    <app-map></app-map>
+    <app-map #mapCopm></app-map>
+    <app-route-grid #routGridComp (drawEvent)="mapCopm.drawRoute(this.car)"></app-route-grid>
   </mat-drawer-content>
 </mat-drawer-container>

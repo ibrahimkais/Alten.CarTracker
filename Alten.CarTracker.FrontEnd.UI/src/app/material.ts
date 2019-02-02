@@ -12,6 +12,7 @@ import {
 } from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
+import {ScrollDispatchModule} from '@angular/cdk/scrolling';
 
 @NgModule({
     imports: [
@@ -27,6 +28,7 @@ import { NgModule } from '@angular/core';
         MatFormFieldModule,
         MatTooltipModule,
         FormsModule,
+        ScrollDispatchModule
     ],
     exports: [
         MatButtonModule,
@@ -41,6 +43,7 @@ import { NgModule } from '@angular/core';
         MatFormFieldModule,
         MatTooltipModule,
         FormsModule,
+        ScrollDispatchModule
     ],
 })
 

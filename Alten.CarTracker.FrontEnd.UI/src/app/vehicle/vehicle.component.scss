@@ -1,0 +1,39 @@
+@mixin keyframes($animation-name) {
+    @-webkit-keyframes #{$animation-name} {
+      @content;
+    }
+    @-moz-keyframes #{$animation-name} {
+      @content;
+    }  
+    @-ms-keyframes #{$animation-name} {
+      @content;
+    }
+    @-o-keyframes #{$animation-name} {
+      @content;
+    }  
+    @keyframes #{$animation-name} {
+      @content;
+    }
+  }
+  
+  @include keyframes(flash-red) {
+    0% { background-color: red; }
+    100% { background-color: #424242; }
+  }
+  
+  @mixin animation($str) {
+    -webkit-animation: #{$str};
+    -moz-animation: #{$str};
+    -ms-animation: #{$str};
+    -o-animation: #{$str};
+    animation: #{$str};      
+  }
+  
+.blink_me {
+    @include animation('flash-red 1s linear infinite');
+  }
+  
+
+.follow {
+  color: yellow;
+}

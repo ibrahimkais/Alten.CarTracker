@@ -14,7 +14,7 @@ import { Car } from '../models/Car';
 
 export class DataFilterComponent implements OnInit {
   @ViewChild('sidenav') public sidenav: MatSidenav;
-  opened = true;
+  opened = false;
 
   statuses: StatusLookup[] = [];
   customers: Customer[] = [];

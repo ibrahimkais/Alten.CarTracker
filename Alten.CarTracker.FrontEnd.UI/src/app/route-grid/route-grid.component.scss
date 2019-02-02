@@ -1,0 +1,37 @@
+.slider {
+    position: absolute;
+    width: 35%;
+    height: 44vh;
+    top: 50%;
+    overflow: hidden;
+    transition: all 1s;
+    right: 0;
+    background-color: #424242;
+  }
+  
+.slider.close {
+    top: 100vh;
+    height: 0;
+  }
+  
+  table {
+    width: 100%;
+  }
+
+  .route-icon {
+    padding: 0 14px;
+  }
+  
+  .route-spacer {
+    flex: 1 1 auto;
+  }
+
+  .route-viewport {
+    height: inherit;
+    width: 100%;
+    border: 1px solid black;
+  }
+
+  .mat-row:hover {
+    background: rgba(255,255,255,.04)
+  }

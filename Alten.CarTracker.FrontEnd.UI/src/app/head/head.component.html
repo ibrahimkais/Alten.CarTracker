@@ -7,6 +7,10 @@
       <div class="logo"></div>
       <span>{{appHeader}} <small>{{creator}}</small></span>
       <span class="example-spacer"></span>
+      <div class="lastUpdate">
+        <small *ngIf="lastUpdate">Last update:</small>
+        <small>{{lastUpdate | date: 'medium'}}</small>
+      </div>
     </mat-toolbar-row>
   </mat-toolbar>
 </header>

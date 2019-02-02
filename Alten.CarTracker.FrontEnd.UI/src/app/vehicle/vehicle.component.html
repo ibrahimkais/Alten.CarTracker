@@ -12,7 +12,7 @@
   <button mat-icon-button (click)="zoom()">
     <mat-icon matTooltip="Zoom" matTooltipPosition="below">zoom_in</mat-icon>
   </button>
-  <button mat-icon-button (click)="follow()">
+  <button mat-icon-button (click)="follow()" [ngClass]="{'follow': followCar}">
     <mat-icon matTooltip="Follow" matTooltipPosition="below">visibility</mat-icon>
   </button>
   <button mat-icon-button (click)="showRoute()">

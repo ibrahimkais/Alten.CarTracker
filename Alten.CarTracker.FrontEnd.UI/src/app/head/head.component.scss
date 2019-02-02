@@ -8,4 +8,15 @@ header {
     height: 65px;
     display: inline-block;
   }
+
+  .lastUpdate {
+    padding: 0 14px;
+    position: absolute;
+    right: 0;
+
+    
+  }
+  .lastUpdate :first-child{
+    display: block;
+  }
 }

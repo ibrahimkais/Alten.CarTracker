@@ -7,6 +7,7 @@ import { CarStatus } from '../models/carStatus';
 import { CarDisconnected } from '../models/carDisconnected';
 import { SignalRService } from '../services/signal-rservice.service';
 import { Statuses } from '../Interfaces/enums';
+import { SidenavService } from '../services/SideNavService';
 
 @Component({
   selector: 'app-map',
@@ -27,7 +28,7 @@ export class MapComponent implements OnInit, ICarStatusChanged {
     symbolLayers: [{
       type: 'icon',
       resource: {
-        href: 'assets/images/car.png'
+        href: 'assets/images/car2.png'
       },
       size: 80,
       outline: {
@@ -36,7 +37,7 @@ export class MapComponent implements OnInit, ICarStatusChanged {
       }
     }],
     verticalOffset: {
-      screenLength: 40,
+      screenLength: 15,
       maxWorldLength: 300,
       minWorldLength: 50
     },
@@ -105,7 +106,9 @@ export class MapComponent implements OnInit, ICarStatusChanged {
     },
   ];
 
-  constructor(private dataService: DataService, private signalRService: SignalRService) { }
+  constructor(private dataService: DataService,
+    private signalRService: SignalRService,
+    private sidenav: SidenavService) { }
 
   ngOnInit() {
     this.signalRService.subscribe(this);
@@ -153,6 +156,9 @@ export class MapComponent implements OnInit, ICarStatusChanged {
 
       this.carsGraphiclayer = new GraphicsLayer({
         title: 'Cars',
+        popupTemplate: {
+          content: 'Vin Code: {vinCode}',
+        }
       });
 
       this.webScene = new WebScene({
@@ -171,7 +177,7 @@ export class MapComponent implements OnInit, ICarStatusChanged {
 
       const home = new Home({
         view: this.webView,
-        goToOverride: () => this.zoomToDefault().bind(this),
+        goToOverride: () => this.zoomToDefault(),
       });
 
       home.on('go', () => this.zoomToDefault());
@@ -193,7 +199,10 @@ export class MapComponent implements OnInit, ICarStatusChanged {
       });
 
       this.webScene.watch('loaded', (newValue: boolean, oldValue: boolean, propertyName: string, target: any) => {
-        if (newValue === true) { setTimeout(() => this.zoomToDefault(), 5000); }
+        if (newValue === true) { setTimeout(() => {
+          this.zoomToDefault();
+          this.sidenav.open();
+        }, 7000); }
       });
     }
     );
@@ -246,23 +255,22 @@ export class MapComponent implements OnInit, ICarStatusChanged {
       }
     )
 
-  zoomToCar = (carId: string) => {
+  zoomToCar = (vinCode: string) => {
     const car = this.carsGraphiclayer.graphics.find(g => {
-      return g.attributes.carId === carId;
+      return g.attributes.vinCode === vinCode;
     });
-    this.carsGraphiclayer.view.goTo({
-      'position': {
-        'spatialReference': {
-          'wkid': 102100
+    if (car) {
+      this.webView.goTo({
+        'position': {
+          latitude: (car.geometry.y - 0.00359893540083),
+          longitude: (car.geometry.x + 0.00042102946339),
+          'z': 164.40829646680504
         },
-        'x': car.geometry.x,
-        'y': car.geometry.y,
-        'z': car.geometry.z
-      },
-      'heading': 351.28636026422873,
-      'tilt': 78.1896252071027
+        'heading': 353.4351432456543,
+        'tilt': 67.76378553470832
+      }
+      );
     }
-    );
   }
 
   updateCarLocation = (vinCode: string, x: number, y: number) => {

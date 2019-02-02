@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Car } from '../models/Car';
 import { ICarStatusChanged } from '../Interfaces/ICarStatusChanged';
 import { CarStatus } from '../models/carStatus';
@@ -13,7 +13,10 @@ import { Statuses } from '../Interfaces/enums';
 })
 export class VehicleComponent implements OnInit, ICarStatusChanged {
   isDisconnected = false;
+  followCar = false;
   @Input() car: Car;
+  @Output() zoomEvent = new EventEmitter();
+  @Output() routesEvent = new EventEmitter();
 
   constructor(private signalRService: SignalRService) { }
 
@@ -28,6 +31,9 @@ export class VehicleComponent implements OnInit, ICarStatusChanged {
       this.car.lastStatusId = carStatus.statusId;
       this.car.carStatuses.push(carStatus);
       this.isDisconnected = false;
+      if (this.followCar) {
+        this.zoom();
+      }
     }
   }
 
@@ -38,15 +44,14 @@ export class VehicleComponent implements OnInit, ICarStatusChanged {
     }
   }
 
-  zoom = () => {
+  zoom = (): void => this.zoomEvent.emit(null);
 
+  follow = (): void => {
+    this.followCar = !this.followCar;
+    if (this.followCar) {
+      this.zoom();
+    }
   }
 
-  follow = () => {
-
-  }
-
-  showRoute = () => {
-
-  }
+  showRoute = (): void => this.routesEvent.emit(null);
 }
