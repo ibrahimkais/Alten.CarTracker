@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -34,26 +35,44 @@ namespace Alten.CarTracker.Infrastructure.ServiceDiscovery
 			string addressB = addresses.Addresses.First();
 			var address = addressB.Contains('*') ? addressB.Replace("*", ip) : addressB.Contains('+') ? addressB.Replace("+", ip) : addressB;
 
-			System.Console.WriteLine($"Address used for Consul registration: {address} for app {consulConfig.Value.ServiceName}");
+			Console.WriteLine($"Address used for Consul registration: {address} for app {consulConfig.Value.ServiceName}");
+
+			var uri = new Uri(address);
+			var serviceId = $"{consulConfig.Value.ServiceID}-{hostname}-{uri.Port}";
+			var serviceChecks = new List<AgentServiceCheck>();
+
+			if (!string.IsNullOrEmpty(consulConfig.Value.HealthCheckTemplate))
+			{
+				var healthCheckUri = new Uri(uri, consulConfig.Value.HealthCheckTemplate).OriginalString;
+				serviceChecks.Add(new AgentServiceCheck()
+				{
+					Status = HealthStatus.Passing,
+					DeregisterCriticalServiceAfter = TimeSpan.FromMinutes(1),
+					Interval = TimeSpan.FromSeconds(5),
+					HTTP = healthCheckUri
+				});
+
+				logger.LogInformation($"Adding healthcheck for service {serviceId}, checking {healthCheckUri}.");
+			}
 
 			// Register service with consul
-			var uri = new Uri(address);
 			var registration = new AgentServiceRegistration()
 			{
-				ID = $"{consulConfig.Value.ServiceID}-{hostname}-{uri.Port}",
+				Checks = serviceChecks.ToArray(),
+				ID = serviceId,
 				Name = consulConfig.Value.ServiceName,
 				Address = $"{uri.Scheme}://{uri.Host}",
 				Port = uri.Port
 			};
 
 			logger.LogInformation("Registering with Consul");
-			consulClient.Agent.ServiceDeregister(registration.ID).Wait();
-			consulClient.Agent.ServiceRegister(registration).Wait();
+			consulClient.Agent.ServiceDeregister(registration.ID).GetAwaiter().GetResult();
+			consulClient.Agent.ServiceRegister(registration).GetAwaiter().GetResult();
 
 			lifetime.ApplicationStopping.Register(() =>
 			{
 				logger.LogInformation("Deregistering from Consul");
-				consulClient.Agent.ServiceDeregister(registration.ID).Wait();
+				consulClient.Agent.ServiceDeregister(registration.ID).GetAwaiter().GetResult();
 			});
 
 			return app;

@@ -1,8 +1,8 @@
 ﻿using Alten.CarTracker.Infrastructure.Messaging;
 using Microsoft.Extensions.Configuration;
+using Serilog;
 using System;
 using System.IO;
-using System.Threading;
 
 namespace Alten.CarTracker.Services.TimeService
 {
@@ -21,11 +21,11 @@ namespace Alten.CarTracker.Services.TimeService
 				.AddJsonFile($"appsettings.{_env}.json", optional: false)
 				.Build();
 
-			//Log.Logger = new LoggerConfiguration()
-			//	.ReadFrom.Configuration(Config)
-			//	.CreateLogger();
+			Log.Logger = new LoggerConfiguration()
+				.ReadFrom.Configuration(Config)
+				.CreateLogger();
 
-			//Log.Information($"Environment: {_env}");
+			Log.Information($"Environment: {_env}");
 		}
 
 		static void Main(string[] args)
@@ -41,12 +41,9 @@ namespace Alten.CarTracker.Services.TimeService
 			RabbitMQMessagePublisher messagePublisher = new RabbitMQMessagePublisher(host, userName, password, exchange);
 			TimeManager manager = new TimeManager(messagePublisher);
 			manager.Start();
+			Log.Information("Time service started.");
 
-			//Log.Information("Time service started.");
-			while (true)
-			{
-				Thread.Sleep(59999);
-			}
+			Console.ReadKey();
 		}
 	}
 }

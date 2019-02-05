@@ -1,5 +1,7 @@
 ﻿using Alten.CarTracker.Services.StatusReceivedService.Domain.Model;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Storage;
 using Polly;
 using System;
 
@@ -9,10 +11,12 @@ namespace Alten.CarTracker.Services.StatusReceivedService.DataAccess
 	{
 		public EfDbContext(DbContextOptions<EfDbContext> options) : base(options)
 		{
-			Policy
-				.Handle<Exception>()
-				.WaitAndRetry(5, r => TimeSpan.FromSeconds(5))
-				.Execute(() => Database.Migrate());
+			if (!Database.GetService<IRelationalDatabaseCreator>().Exists())
+			{
+				Policy.Handle<Exception>()
+					.WaitAndRetry(5, r => TimeSpan.FromSeconds(5))
+					.Execute(() => Database.Migrate());
+			}
 		}
 
 		protected override void OnModelCreating(ModelBuilder builder)

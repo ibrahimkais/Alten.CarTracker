@@ -7,6 +7,7 @@ using Alten.CarTracker.Services.StatusReceivedService.Domain.Model;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,6 +52,7 @@ namespace Alten.CarTracker.Services.StatusReceivedService.MessageHandler
 		{
 			JObject messageObject = MessageSerializer.Deserialize(message);
 			Console.WriteLine($"Message Received: MessageType {messageType}");
+			Log.Information($"Message Received: MessageType {messageType}");
 			switch (messageType)
 			{
 				case "MinuteHasPassed":
@@ -62,13 +64,15 @@ namespace Alten.CarTracker.Services.StatusReceivedService.MessageHandler
 
 		private async Task<bool> HandleAsync(MinuteHasPassed message)
 		{
-			Console.WriteLine($"Message Handled");
+			Console.WriteLine("Minute Message Handled");
+			Log.Information("Minute Message Handled");
 			Dictionary<string, UpdateStatus> checkList = StatusCheckList.Instance.StartCheck();
 
 			foreach (var command in checkList)
 			{
 				StatusReceived statusReceived = _mapper.Map<UpdateStatus, StatusReceived>(command.Value);
 				await _messagePublisher.PublishMessageAsync(statusReceived.MessageType, statusReceived, "StatusReceived");
+				Log.Information($"Status Message published to Message Queue for {statusReceived.VinCode}");
 			}
 
 			foreach (var item in CarIds)
@@ -77,6 +81,7 @@ namespace Alten.CarTracker.Services.StatusReceivedService.MessageHandler
 				{
 					VehicleDisconnected vehicleDissconnected = new VehicleDisconnected(Guid.NewGuid(), item);
 					await _messagePublisher.PublishMessageAsync(vehicleDissconnected.MessageType, vehicleDissconnected, "StatusReceived");
+					Log.Information($"Disconnect Message published to Message Queue for {vehicleDissconnected.VinCode}");
 				}
 			}
 

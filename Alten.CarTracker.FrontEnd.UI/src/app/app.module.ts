@@ -15,7 +15,6 @@ import { VehicleComponent } from './vehicle/vehicle.component';
 import { DataFilterComponent } from './data-filter/data-filter.component';
 import { SidenavService } from './services/SideNavService';
 import { CarsFilterPipe } from './data-filter/CarsFilterPipe';
-import { TableDataSourcePipe } from './route-grid/table-data-source.pipe';
 
 @NgModule({
   declarations: [
@@ -27,7 +26,6 @@ import { TableDataSourcePipe } from './route-grid/table-data-source.pipe';
     VehicleComponent,
     DataFilterComponent,
     CarsFilterPipe,
-    TableDataSourcePipe
   ],
   imports: [
     BrowserModule,

@@ -6,6 +6,7 @@ services:
     container_name: rabbit
     volumes:
       - rabbitmqdata:/var/lib/rabbitmq
+      - ./definitions.json:/opt/definitions.json:ro
     ports:
       - "15672:15672"
       - "5672:5672"
@@ -25,13 +26,30 @@ services:
       - MSSQL_PID=Developer
       - SA_PASSWORD=P@ssw0rd
 
+  discoveryservice:
+    image: consul:latest
+    container_name: discoveryservice
+    ports:
+      - "8500:8500"
+    command: ["agent", "-dev", "-client", "0.0.0.0", "-bind", "0.0.0.0"]  
+
+  logserver:
+    image: datalust/seq:latest
+    container_name: logserver
+    ports:
+      - "5341:80"
+    environment:
+      - ACCEPT_EULA=Y 
+
   alten.cartracker.services.statusreceivedservice:
     image: car_tracker/statusreceivedservice
     container_name: statusreceivedservice
+    restart: on-failure
     build:
       context: .
       dockerfile: Alten.CarTracker.Services.StatusReceivedService/Dockerfile
     depends_on:
+      - discoveryservice
       - rabbitmq
       - sqlserver
     ports:
@@ -43,10 +61,12 @@ services:
   alten.cartracker.backendapi.api:
     image: car_tracker/backendapi
     container_name: backendapi
+    restart: on-failure
     build:
       context: .
       dockerfile: Alten.CarTracker.BackEndApi.Api/Dockerfile
     depends_on:
+      - discoveryservice
       - rabbitmq
       - sqlserver
     ports:
@@ -58,6 +78,7 @@ services:
   alten.cartracker.services.timeservice:
     image: car_tracker/timeservice
     container_name: timeservice
+    restart: on-failure
     build:
       context: .
       dockerfile: Alten.CarTracker.Services.TimeService/Dockerfile
@@ -69,10 +90,12 @@ services:
   alten.cartracker.services.notificationservice:
     image: car_tracker/notificationservice
     container_name: notificationservice
+    restart: on-failure
     build:
       context: .
       dockerfile: Alten.CarTracker.Services.NotificationService/Dockerfile
     depends_on:
+      - discoveryservice
       - rabbitmq
     ports:
       - "12002:12002"
@@ -83,6 +106,7 @@ services:
   alten.cartracker.simulation.simulator:
     image: car_tracker/simulation
     container_name: simulation
+    restart: on-failure
     depends_on:
       - rabbitmq
     build:
@@ -92,8 +116,9 @@ services:
       - CAR_TRACKER_ENVIRONMENT=Production
 
   alten.cartracker.frontend.ui:
-    image: car_tracker/frontend
+    image: car_tracker/frontend:dev
     container_name: frontend
+    restart: on-failure
     build:
       context: .
       dockerfile: dockerfile
@@ -102,7 +127,7 @@ services:
 
 volumes:
   sqlserverdata:
-    external: true    
+    external: false    
   rabbitmqdata:
-    external: true
+    external: false
 

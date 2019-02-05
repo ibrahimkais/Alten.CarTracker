@@ -38,13 +38,15 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A75F4238-FE07-4E69-BF0B-0960DDB055DE}"
 	ProjectSection(SolutionItems) = preProject
 		alten-challenge[6289].txt = alten-challenge[6289].txt
-		dockerfile = dockerfile
-		rabbit_22f68a1023e6_2019-1-26.json = rabbit_22f68a1023e6_2019-1-26.json
+		definitions.json = definitions.json
+		C:\Users\Administrator\Desktop\dockerfile = C:\Users\Administrator\Desktop\dockerfile
 	EndProjectSection
 EndProject
 Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "Alten.CarTracker.FrontEnd.UI", "Alten.CarTracker.FrontEnd.UI\Alten.CarTracker.FrontEnd.UI.njsproj", "{42DE9FC4-5068-4023-9004-DA3B75D76C80}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{928E37EA-DE2F-46F4-A006-654B95704095}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alten.CarTracker.Infrastructure.ServiceDiscovery", "Alten.CarTracker.Infrastructure.ServiceDiscovery\Alten.CarTracker.Infrastructure.ServiceDiscovery.csproj", "{B0225FD2-A873-4074-BEB6-2506D7959048}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{11A001B7-CB4B-4E8C-BBB5-E75151BF8B59}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -96,10 +98,14 @@ Global
 		{42DE9FC4-5068-4023-9004-DA3B75D76C80}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{42DE9FC4-5068-4023-9004-DA3B75D76C80}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{42DE9FC4-5068-4023-9004-DA3B75D76C80}.Release|Any CPU.Build.0 = Release|Any CPU
-		{928E37EA-DE2F-46F4-A006-654B95704095}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{928E37EA-DE2F-46F4-A006-654B95704095}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{928E37EA-DE2F-46F4-A006-654B95704095}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{928E37EA-DE2F-46F4-A006-654B95704095}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0225FD2-A873-4074-BEB6-2506D7959048}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0225FD2-A873-4074-BEB6-2506D7959048}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0225FD2-A873-4074-BEB6-2506D7959048}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0225FD2-A873-4074-BEB6-2506D7959048}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11A001B7-CB4B-4E8C-BBB5-E75151BF8B59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11A001B7-CB4B-4E8C-BBB5-E75151BF8B59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11A001B7-CB4B-4E8C-BBB5-E75151BF8B59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11A001B7-CB4B-4E8C-BBB5-E75151BF8B59}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -116,6 +122,7 @@ Global
 		{4EC98820-F277-4A4C-A9DC-FDBF068109D4} = {6AC8211E-9F42-44C1-83DD-E7A3ADD1CF1B}
 		{7B1D72C0-D2A1-4C5E-B045-A88FB167C690} = {537CE4D4-DF25-4F38-B02B-7BCCB73336E0}
 		{42DE9FC4-5068-4023-9004-DA3B75D76C80} = {E9DA7EDB-F151-4844-9F52-552EF553513E}
+		{B0225FD2-A873-4074-BEB6-2506D7959048} = {5BD11311-87FD-4305-9122-9902D1605276}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B193DB73-C91E-431D-9D3C-3950AD7E3734}

@@ -68,7 +68,7 @@ namespace Alten.CarTracker.Simulation.Simulator
 
 			carMessageHandler.Start();
 			
-			Console.ReadLine();
+			Console.ReadKey();
 		}
 	}
 }

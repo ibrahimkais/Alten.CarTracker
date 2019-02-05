@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
+using Serilog;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -37,11 +38,13 @@ namespace Alten.CarTracker.Services.StatusReceivedService.Controllers
 
 					UpdateStatus message = _mapper.Map<UpdateStatus>(command);
 					StatusCheckList.Instance.ReceviedMessages.Enqueue(message);
+					Log.Information($"Status message Received and enqueued for {message.VinCode}");
+
 
 					Status status = Mapper.Map<UpdateStatus, Status>(message);
 					_dbContext.Add(status);
 					await _dbContext.SaveChangesAsync();
-
+					Log.Information($"Status message saved in database for {message.VinCode}");
 					return Ok();
 				}
 				return BadRequest();
@@ -49,6 +52,7 @@ namespace Alten.CarTracker.Services.StatusReceivedService.Controllers
 			catch (DbUpdateException)
 			{
 				ModelState.AddModelError("Database Error", "Unable to save changes.");
+				Log.Error("Database Error", "Unable to save changes.");
 				return StatusCode(StatusCodes.Status500InternalServerError);
 			}
 		}
@@ -56,6 +60,7 @@ namespace Alten.CarTracker.Services.StatusReceivedService.Controllers
 		[HttpGet]
 		public async Task<ActionResult<IList<CarStatusLookup>>> GetCarStatusLookup()
 		{
+			Log.Information("Request for getting car status lookup");
 			List<CarStatusLookup> carStatusLookups = await _dbContext.Set<CarStatusLookup>().ToListAsync();
 			return carStatusLookups;
 		}

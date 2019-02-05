@@ -5,6 +5,7 @@ using Alten.CarTracker.Services.NotificationService.SignalRHubs;
 using AutoMapper;
 using Microsoft.AspNetCore.SignalR;
 using Newtonsoft.Json.Linq;
+using Serilog;
 using System.Threading.Tasks;
 
 namespace Alten.CarTracker.Services.NotificationService.MessageHandler
@@ -38,9 +39,11 @@ namespace Alten.CarTracker.Services.NotificationService.MessageHandler
 			switch (messageType)
 			{
 				case "StatusReceived":
+					Log.Information("Status Message Received from message queue");
 					await HandleAsync(messageObject.ToObject<StatusReceived>());
 					break;
 				case "VehicleDisconnected":
+					Log.Information("Disconnect Message Received from message queue");
 					await HandleAsync(messageObject.ToObject<VehicleDisconnected>());
 					break;
 			}
@@ -51,6 +54,7 @@ namespace Alten.CarTracker.Services.NotificationService.MessageHandler
 		{
 			StatusReceivedDTO status = _mapper.Map<StatusReceived, StatusReceivedDTO>(message);
 			await _statusHubContext.Clients.All.SendAsync("sendstatus", status);
+			Log.Information($"Status Message Sent to UI for {status.VinCode}");
 			return true;
 		}
 
@@ -58,6 +62,7 @@ namespace Alten.CarTracker.Services.NotificationService.MessageHandler
 		{
 			VehicleDisconnectedDTO status = _mapper.Map<VehicleDisconnected, VehicleDisconnectedDTO>(message);
 			await _disconnectedHubContext.Clients.All.SendAsync("vehicledissconnected", status);
+			Log.Information($"Disconnect Message Sent to UI for {status.VinCode}");
 			return true;
 		}
 	}

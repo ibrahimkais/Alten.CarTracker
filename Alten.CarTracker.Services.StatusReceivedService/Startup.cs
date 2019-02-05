@@ -1,15 +1,21 @@
 ﻿using Alten.CarTracker.Infrastructure.Messaging;
+using Alten.CarTracker.Infrastructure.ServiceDiscovery;
 using Alten.CarTracker.Services.StatusReceivedService.Application;
 using Alten.CarTracker.Services.StatusReceivedService.AutoMapperProfiles;
 using Alten.CarTracker.Services.StatusReceivedService.DataAccess;
 using Alten.CarTracker.Services.StatusReceivedService.MessageHandler;
 using AutoMapper;
+using Consul;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.HealthChecks;
+using Serilog;
+using Swashbuckle.AspNetCore.Swagger;
+using System;
 
 namespace Alten.CarTracker.Services.StatusReceivedService
 {
@@ -62,17 +68,37 @@ namespace Alten.CarTracker.Services.StatusReceivedService
 
 			services.AddSingleton(sp => StatusCheckList.Instance);
 
-
 			services.AddTransient<IMessagePublisher>((sp) => new RabbitMQMessagePublisher(host, userName, password, exchange));
 			services.AddSingleton((sp) => new RabbitMQMessageHandler(host, userName, password, exchange, "MinuteHasPassed", "MinuteHasPassed"));
 
+			// add consul
+			services.Configure<ConsulConfig>(Configuration.GetSection("consulConfig"));
+			services.AddSingleton<IConsulClient, ConsulClient>(p => new ConsulClient(consulConfig =>
+			{
+				var address = Configuration["consulConfig:address"];
+				consulConfig.Address = new Uri(address);
+			}));
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+			// Register the Swagger generator, defining one or more Swagger documents
+			services.AddSwaggerGen(c => c.SwaggerDoc("v1", new Info { Title = "Status Received Service", Version = "v1" }));
+
+			services.AddHealthChecks(checks =>
+			{
+				checks.WithDefaultCacheDuration(TimeSpan.FromSeconds(1));
+				checks.AddSqlCheck("CarStatusDbConnection", Configuration.GetConnectionString("CarStatusDbConnection"));
+			});
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApplicationLifetime lifetime, EfDbContext dbContext, IMapper mapper)
 		{
 			app.UseCors("CorsPolicy");
+
+			Log.Logger = new LoggerConfiguration()
+			   .ReadFrom.Configuration(Configuration)
+			   .CreateLogger();
+
 			app.UseMvc();
 			app.UseDefaultFiles();
 			app.UseStaticFiles();
@@ -83,6 +109,12 @@ namespace Alten.CarTracker.Services.StatusReceivedService
 
 			var handler = app.ApplicationServices.GetService<RabbitMQMessageHandler>();
 			handler.Start(minutHasPassedMessageHandler);
+
+			app.UseSwagger();
+
+			app.UseSwaggerUI(c =>c.SwaggerEndpoint("/swagger/v1/swagger.json", "Status Received Service"));
+
+			app.RegisterWithConsul(lifetime);
 		}
 	}
 }

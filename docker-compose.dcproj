@@ -3,7 +3,7 @@
   <PropertyGroup Label="Globals">
     <ProjectVersion>2.1</ProjectVersion>
     <DockerTargetOS>Linux</DockerTargetOS>
-    <ProjectGuid>928e37ea-de2f-46f4-a006-654b95704095</ProjectGuid>
+    <ProjectGuid>11a001b7-cb4b-4e8c-bbb5-e75151bf8b59</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/api/data</DockerServiceUrl>
     <DockerServiceName>alten.cartracker.backendapi.api</DockerServiceName>
