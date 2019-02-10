@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.IO;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Alten.CarTracker.Simulation.Simulator
@@ -67,8 +68,8 @@ namespace Alten.CarTracker.Simulation.Simulator
 			});
 
 			carMessageHandler.Start();
-			
-			Console.ReadKey();
+
+			Thread.Sleep(Timeout.Infinite);
 		}
 	}
 }

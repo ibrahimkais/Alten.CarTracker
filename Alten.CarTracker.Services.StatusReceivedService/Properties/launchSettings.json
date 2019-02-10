@@ -11,7 +11,7 @@
 	"profiles": {
 		"IIS Express": {
 			"commandName": "IISExpress",
-			"launchBrowser": true,
+			"launchBrowser": false,
 			"launchUrl": "api/Status",
 			"environmentVariables": {
 				"ASPNETCORE_ENVIRONMENT": "Development"
@@ -19,16 +19,16 @@
 		},
 		"Alten.CarTracker.Services.StatusReceivedService": {
 			"commandName": "Project",
-			"launchBrowser": true,
+			"launchBrowser": false,
 			"launchUrl": "api/Status",
 			"environmentVariables": {
-				"ASPNETCORE_ENVIRONMENT": "Development"
+				"ASPNETCORE_ENVIRONMENT": "Production"
 			},
 			"applicationUrl": "http://localhost:12001"
 		},
 		"Docker": {
 			"commandName": "Docker",
-			"launchBrowser": true,
+			"launchBrowser": false,
 			"launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/api/values"
 		}
 	}

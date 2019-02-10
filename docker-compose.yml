@@ -4,6 +4,7 @@ services:
   rabbitmq:
     image: rabbitmq:3-management
     container_name: rabbit
+    restart: on-failure
     volumes:
       - rabbitmqdata:/var/lib/rabbitmq
       - ./definitions.json:/opt/definitions.json:ro
@@ -17,6 +18,7 @@ services:
   sqlserver:
     image: microsoft/mssql-server-linux:latest
     container_name: sqlserver
+    restart: on-failure
     volumes:
       - sqlserverdata:/var/opt/mssql 
     ports:
@@ -29,6 +31,7 @@ services:
   discoveryservice:
     image: consul:latest
     container_name: discoveryservice
+    restart: on-failure
     ports:
       - "8500:8500"
     command: ["agent", "-dev", "-client", "0.0.0.0", "-bind", "0.0.0.0"]  
@@ -36,8 +39,9 @@ services:
   logserver:
     image: datalust/seq:latest
     container_name: logserver
+    restart: on-failure
     ports:
-      - "5341:80"
+      - "12005:80"
     environment:
       - ACCEPT_EULA=Y 
 

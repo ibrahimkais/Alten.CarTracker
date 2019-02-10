@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Serilog;
 using System;
 using System.IO;
+using System.Threading;
 
 namespace Alten.CarTracker.Services.TimeService
 {
@@ -43,7 +44,7 @@ namespace Alten.CarTracker.Services.TimeService
 			manager.Start();
 			Log.Information("Time service started.");
 
-			Console.ReadKey();
+			Thread.Sleep(Timeout.Infinite);
 		}
 	}
 }
